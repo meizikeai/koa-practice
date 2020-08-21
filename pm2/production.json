@@ -1,0 +1,16 @@
+{
+  "name": "koa-practice",
+  "script": "/home/work/koa-practice/bin/server.js",
+  "error_file": "/data/logs/pm2/koa-practice/error.log",
+  "out_file": "/data/logs/pm2/koa-practice/out.log",
+  "log_date_format": "YYYY-MM-DD HH:mm:ss Z",
+  "merge_logs": true,
+  "ignore_watch": [
+    "node_modules"
+  ],
+  "instances": 0,
+  "exec_mode": "cluster",
+  "env": {
+    "NODE_ENV": "production"
+  }
+}

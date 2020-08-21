@@ -1,0 +1,87 @@
+.demo {
+  font-size: .32rem;
+  margin: 1rem;
+
+  h1 {
+    font-size: 2em;
+    line-height: 1.5;
+  }
+
+  p {
+    line-height: 1.5;
+
+    b {
+      display: inline-block;
+      margin: 0 .3rem;
+    }
+  }
+
+  .click {
+    line-height: 1.5;
+    margin: .15rem 0 .3rem 0;
+
+    span {
+      display: inline-block;
+      margin: 0 .1rem;
+      color: red;
+    }
+  }
+
+  button {
+    padding: .2rem .5rem;
+    border: 1px solid #d9d9d9;
+    border-radius: .08rem;
+    background-color: #fff;
+    outline: none;
+    color: #666;
+  }
+
+  button:hover {
+    border: 1px solid #4595ec;
+    color: #4595ec;
+  }
+}
+
+.demo-pc {
+  font-size: .16rem;
+  margin: .5rem;
+
+  h1 {
+    font-size: 2em;
+    line-height: 1.5;
+  }
+
+  p {
+    line-height: 1.5;
+
+    b {
+      display: inline-block;
+      margin: 0 .03rem;
+    }
+  }
+
+  .click {
+    line-height: 1.5;
+    margin: .1rem 0 .15rem 0;
+
+    span {
+      display: inline-block;
+      margin: 0 .1rem;
+      color: red;
+    }
+  }
+
+  button {
+    padding: .1rem .25rem;
+    border: 1px solid #d9d9d9;
+    border-radius: .08rem;
+    background-color: #fff;
+    outline: none;
+    color: #666;
+  }
+
+  button:hover {
+    border: 1px solid #4595ec;
+    color: #4595ec;
+  }
+}

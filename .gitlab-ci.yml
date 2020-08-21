@@ -1,0 +1,64 @@
+before_script:
+  - git clone https://github.com/meizikeai/gitlab-shell-practice.git
+
+# after_script:
+# - rm -rf gitlab-shell-practice
+
+.access_branch_template: &access_branch
+  only:
+    - master
+    - test
+
+variables:
+  deploys: /home/work/koa-practice
+  project: koa-practice
+  scripts: blued-yaml-shell
+  dingtalk: https://oapi.dingtalk.com/robot/send?access_token=XXX
+  feishu: https://open.feishu.cn/open-apis/bot/hook/XXX
+
+stages:
+  - install
+  - check
+  - deploy-development
+  - deploy-production
+
+cache:
+  key: ${CI_BUILD_REF_NAME}
+  paths:
+    - node_modules/
+    - version
+
+install:
+  <<: *access_branch
+  stage: install
+  script:
+    - bash $scripts/declare.sh
+    - bash $scripts/install.sh
+
+check:
+  <<: *access_branch
+  stage: check
+  script:
+    - bash $scripts/check.sh
+
+deploy-development:
+  stage: deploy-development
+  when: on_success
+  script:
+    - bash $scripts/rollback.sh "ssr"
+    - bash $scripts/deploy.sh "work@192.168.0.1" "ssr"
+  environment:
+    name: development
+  only:
+    - test
+
+deploy-production:
+  stage: deploy-production
+  when: manual
+  script:
+    - bash $scripts/rollback.sh "ssr"
+    - bash $scripts/deploy.sh "work@192.168.1.1 work@192.168.1.2" "ssr"
+  environment:
+    name: production
+  only:
+    - master
