@@ -1,7 +1,7 @@
 const ctxUtils = require('../libs/ctx-utils')
 
 module.exports = {
-  async demo (ctx) {
+  async demo(ctx) {
     const { device } = ctxUtils({ ctx })
 
     ctx.state = Object.assign({}, {
@@ -17,13 +17,13 @@ module.exports = {
     await ctx.render('demo')
   },
 
-  async json (ctx) {
+  async json(ctx) {
     ctx.body = {
       title: 'koa2 json',
     }
   },
 
-  async string (ctx) {
+  async string(ctx) {
     ctx.body = 'koa2 string'
   },
 }

@@ -2,7 +2,7 @@ const ctxUtils = require('../libs/ctx-utils')
 // const { getAnchors, getUser } = require('../models/common')
 
 module.exports = {
-  async home (ctx) {
+  async home(ctx) {
     const { device } = ctxUtils({ ctx })
 
     ctx.state = {
@@ -14,14 +14,14 @@ module.exports = {
       }),
     }
 
-    // await getAnchors({ ctx })
-    // await getUser({ ctx })
+    // await getAnchors()
+    // await getUser()
 
     await ctx.render('index')
   },
 
   // 404
-  async notFound (ctx, next) {
+  async notFound(ctx, next) {
     const accepts = ctx.accepts('html', 'json')
 
     if (accepts === 'html') {
@@ -43,7 +43,7 @@ module.exports = {
   },
 
   // 403
-  async forbidden (ctx, next) {
+  async forbidden(ctx, next) {
     const accepts = ctx.accepts('html', 'json')
 
     if (accepts === 'html') {
