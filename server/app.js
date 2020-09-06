@@ -1,4 +1,3 @@
-
 const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
 const compress = require('koa-compress')
@@ -23,15 +22,13 @@ global.KoaPractice = {}
 // error handler
 onerror(app)
 
-// json
-app.use(json())
-
 // logger
 app.use(logger({
-  winston: {
-    appName: 'koa-practice',
-  },
+  appName: 'koa-practice',
 }))
+
+// json
+app.use(json())
 
 app.use(helmet())
 
