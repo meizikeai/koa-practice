@@ -1,6 +1,8 @@
 const fs = require('fs')
 const path = require('path')
+// eslint-disable-next-line
 const React = require('react')
+// eslint-disable-next-line
 const ReactDOMServer = require('react-dom/server')
 
 const isPhone = require('../server/libs/is-phone')
@@ -20,20 +22,21 @@ const isDirectory = dir => {
 
 function ReactDOMServerMiddleware (rel) {
   return (ctx, next) => {
-    // if (ctx.stream) return next()
+    if (ctx.stream) return next()
 
     let stream = ''
+
     global.KoaPractice.device = !isPhone(ctx.request.header['user-agent'])
 
     ctx.stream = async dir => {
       const file = path.resolve(rel, dir)
       try {
-        Object.keys(require.cache).forEach(cachePath => {
-          if (/koa-practice\/client\//ig.test(cachePath)) {
-            // console.log(cachePath)
-            delete require.cache[cachePath]
-          }
-        })
+        // Object.keys(require.cache).forEach(cachePath => {
+        //   if (/koa-practice\/client\//ig.test(cachePath)) {
+        //     // console.log(cachePath)
+        //     delete require.cache[cachePath]
+        //   }
+        // })
 
         const filepath = isDirectory(file) ? `${file}/index.js` : `${file}.js`
         // eslint-disable-next-line import/no-dynamic-require

@@ -1,3 +1,8 @@
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html,
 blockquote,
 body,
@@ -26,6 +31,8 @@ th,
 ul {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  text-size-adjust: none;
 }
 
 table {
@@ -96,7 +103,6 @@ textarea {
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
-  *font-size: 100%;
 }
 
 legend {
@@ -106,6 +112,7 @@ legend {
 html {
   color: #000;
   background: #fff;
+  font-size: 62.5%;
 }
 
 body {
@@ -116,11 +123,16 @@ body {
   width: 100%;
   height: inherit;
   flex-direction: column;
+  margin: 0 auto;
 }
 
 a {
   text-decoration: none;
   vertical-align: top;
+}
+
+img {
+  max-width: 100%;
 }
 
 #app {

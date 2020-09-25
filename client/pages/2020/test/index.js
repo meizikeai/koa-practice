@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { hydrate } from 'react-dom'
 
-import device from '../../utils/get-device'
-import Layout from '../../components/layout'
-import LayoutPC from '../../components/layout-pc'
-import PopupMinLayer from '../../components/popup-min-layer'
+import device from '../../../utils/get-device'
+import Layout from '../../../components/layout'
+import LayoutPC from '../../../components/layout-pc'
+import PopupMinLayer from '../../../components/popup-min-layer'
 
 import './index.scss'
 
@@ -68,4 +68,4 @@ if (typeof window !== 'undefined') {
   hydrate(<App {...config} />, document.querySelector('#app'))
 }
 
-module.exports = App
+export default { App }

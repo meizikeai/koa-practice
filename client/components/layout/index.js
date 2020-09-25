@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import 'node-fetch'
 
-import '../reset/index.css'
+import '../reset.css'
 
 class Layout extends Component {
   constructor () {

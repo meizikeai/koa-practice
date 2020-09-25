@@ -11,21 +11,21 @@ const path = require('path')
 const routerScheme = require('koa-router-scheme')
 const views = require('koa-views')
 
-const raven = require('./libs/raven')
 require('../bin/compatible')
+const raven = require('./libs/raven')
 
 const app = new Koa()
 
 // global
 global.KoaPractice = {}
 
-// error handler
-onerror(app)
-
 // logger
 app.use(logger({
   appName: 'koa-practice',
 }))
+
+// error
+onerror(app)
 
 // json
 app.use(json())
@@ -44,7 +44,6 @@ app.use(cors({
   origin: e => {
     const white = [
       'http://127.0.0.1:7000',
-      'http://127.0.0.1:9000',
     ]
 
     if (white.includes(e.header.origin)) {

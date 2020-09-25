@@ -2,9 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const glob = require('glob')
 const webpack = require('webpack')
-const Autoprefixer = require('autoprefixer')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
-// const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').default
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -13,6 +11,8 @@ const QiniuPlugin = require('qiniu-webpack-plugin')
 const UglifyWebpackPlugin = require('uglifyjs-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { dll, isDirectory, manifest, qiniu } = require('./config')
+
+const environment = ['core-js/es/map', 'core-js/es/set']
 
 const config = {
   stats: {
@@ -46,13 +46,12 @@ const config = {
     runtimeChunk: true,
     minimizer: [
       new OptimizeCssAssetsPlugin(),
-      new UglifyWebpackPlugin({ sourceMap: true, parallel: true }),
     ],
   },
   module: {
     rules: [
       {
-        test: /(\.jsx|\.js)$/,
+        test: /\.(js|jsx)$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
       },
@@ -64,9 +63,11 @@ const config = {
           {
             loader: 'postcss-loader',
             options: {
-              plugins: [
-                Autoprefixer,
-              ],
+              postcssOptions: {
+                plugins: [
+                  ['autoprefixer'],
+                ],
+              },
             },
           },
           'sass-loader',
@@ -95,9 +96,9 @@ const miniCssPlugin = new MiniCssExtractPlugin({
 })
 
 const compressionPlugin = new CompressionWebpackPlugin({
-  filename: '[path].gz[query]',
+  filename: '[path][base].gz',
   algorithm: 'gzip',
-  test: /\.js$|\.html$|\.css$/,
+  test: /\.js$|\.css$|\.html$/,
   threshold: 10240,
   minRatio: 0.8,
 })
@@ -115,7 +116,7 @@ const qiniuPlugin = new QiniuPlugin({
   ],
 })
 
-const handleHtmlWebpackPlugin = paths => {
+const htmlWebpack = paths => {
   const result = paths.map(data => {
     const name = data.replace(/~/ig, '/')
     const userFile = path.resolve(__dirname, `../pages/${name}/index.hbs`)
@@ -142,6 +143,24 @@ const handleHtmlWebpackPlugin = paths => {
   return result
 }
 
+const uglifyWebpack = mode => {
+  const option = {
+    cache: true,
+    parallel: true,
+    sourceMap: true,
+  }
+
+  if (mode === 'production') {
+    option.uglifyOptions = {
+      compress: {
+        drop_console: true,
+      },
+    }
+  }
+
+  return new UglifyWebpackPlugin(option)
+}
+
 module.exports = (env, argv) => {
   const entry = {}
 
@@ -158,19 +177,22 @@ module.exports = (env, argv) => {
         const tplPath = `${item.split('/pages/')[1].split('/index.js')[0]}`
         const page = tplPath.replace(/\//ig, '~')
 
-        entry[page] = item
+        entry[page] = environment.concat([item])
       })
     })
   } else {
     const page = env.p.replace(/\//ig, '~')
     const dir = path.resolve(__dirname, `../pages/${env.p}`)
 
-    entry[page] = isDirectory(dir) ? `${dir}/index.js` : `${dir}.js`
+    entry[page] = isDirectory(dir)
+      ? environment.concat([`${dir}/index.js`])
+      : environment.concat([`${dir}.js`])
   }
 
   config.entry = entry
   config.plugins.push(miniCssPlugin)
-  config.plugins.push(...handleHtmlWebpackPlugin(env.all === 'true' ? Object.keys(entry) : [env.p.replace(/\//ig, '~')]))
+  config.plugins.push(...htmlWebpack(env.all === 'true' ? Object.keys(entry) : [env.p.replace(/\//ig, '~')]))
+  config.optimization.minimizer.push(uglifyWebpack(argv.mode))
 
   dll.forEach(file => {
     const tags = {
@@ -197,7 +219,6 @@ module.exports = (env, argv) => {
     config.optimization.minimize = true
     config.plugins.push(new CleanWebpackPlugin())
     config.plugins.push(compressionPlugin)
-    // config.plugins.push(new HTMLInlineCSSWebpackPlugin())
     config.plugins.push(qiniuPlugin)
   } else {
     config.devtool = 'inline-source-map'

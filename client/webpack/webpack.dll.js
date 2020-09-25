@@ -24,6 +24,15 @@ module.exports = {
     path: path.resolve(__dirname, '../../public/dll'),
     publicPath: `${qiniu.cdnBase}/web/static/`,
   },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
   plugins: [
     new CleanWebpackPlugin(),
 
@@ -34,9 +43,9 @@ module.exports = {
     }),
 
     new CompressionWebpackPlugin({
-      filename: '[path].gz[query]',
+      filename: '[path][base].gz',
       algorithm: 'gzip',
-      test: /\.js$|\.html$|\.css$/,
+      test: /\.js$|\.css$|\.html$/,
       threshold: 10240,
       minRatio: 0.8,
     }),
