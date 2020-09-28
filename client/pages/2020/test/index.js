@@ -68,4 +68,4 @@ if (typeof window !== 'undefined') {
   hydrate(<App {...config} />, document.querySelector('#app'))
 }
 
-export default { App }
+module.exports = App

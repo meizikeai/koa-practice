@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import 'node-fetch'
+import 'whatwg-fetch'
 
 import '../reset.css'
 

@@ -5,8 +5,4 @@ require('css-modules-require-hook')({
 })
 
 // eslint-disable-next-line
-// require('core-js/stable')
-// eslint-disable-next-line
-// require('regenerator-runtime/runtime')
-// eslint-disable-next-line
 require('@babel/register')

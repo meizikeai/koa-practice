@@ -15,7 +15,7 @@ module.exports = {
       'react-router',
       'react-router-dom',
       'prop-types',
-      'node-fetch',
+      'whatwg-fetch',
     ],
   },
   output: {

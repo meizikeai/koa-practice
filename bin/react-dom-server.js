@@ -20,7 +20,7 @@ const isDirectory = dir => {
   return result
 }
 
-function ReactDOMServerMiddleware (rel) {
+function ReactDOMServerMiddleware(rel) {
   return (ctx, next) => {
     if (ctx.stream) return next()
 
@@ -30,6 +30,7 @@ function ReactDOMServerMiddleware (rel) {
 
     ctx.stream = async dir => {
       const file = path.resolve(rel, dir)
+
       try {
         // Object.keys(require.cache).forEach(cachePath => {
         //   if (/koa-practice\/client\//ig.test(cachePath)) {
@@ -42,11 +43,13 @@ function ReactDOMServerMiddleware (rel) {
         // eslint-disable-next-line import/no-dynamic-require
         const APP = require(filepath)
         const element = React.createElement(APP)
+
         stream = ReactDOMServer.renderToString(element)
       } catch (error) {
         console.error(error)
       }
       // console.log(stream)
+
       ctx.state.stream = stream
     }
 

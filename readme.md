@@ -22,11 +22,17 @@ https://github.com/meizikeai/koa-practice.git
 
 #### 开发环境
 
-- 克隆项目 - `$ git clone https://github.com/meizikeai/koa-practice.git`
-- 安装依赖 - `$ cd koa-practice && npm i`
-- 启动项目 - `$ npm run start`
-
+  + 克隆项目 - `$ git clone https://github.com/meizikeai/koa-practice.git`
+  + 安装依赖 - `$ cd koa-practice && npm i`
+  + 启动项目 - `$ npm run start`
 开发依赖[eslint.org](https://eslint.org)，请使用支持它的编辑器。推荐[Visual Studio Code](https://code.visualstudio.com)编辑器。
 
 #### 访问地址
-  - http://127.0.0.1:3000 - 本地
+
+  + http://127.0.0.1:3000 - 本地
+
+#### 注意事项
+
+  + 通过 pm2 启动
+  + 如果已存在任务进程，请先 pm2 delete blued-dream 或 pm2 kill 后再启动
+  + 请使用 pm2 restart /home/work/blued-dream/pm2/production.json 命令

@@ -1,5 +1,5 @@
 {
-  "name": "vendors_b561c8b37b79c92d2984",
+  "name": "vendors_40d2abc03eae2a5d6bd0",
   "content": {
     "./node_modules/react/index.js": {
       "id": 0,
@@ -225,10 +225,17 @@
         ]
       }
     },
-    "./node_modules/node-fetch/browser.js": {
+    "./node_modules/whatwg-fetch/fetch.js": {
       "id": 28,
       "buildMeta": {
-        "providedExports": true
+        "exportsType": "namespace",
+        "providedExports": [
+          "Headers",
+          "Request",
+          "Response",
+          "DOMException",
+          "fetch"
+        ]
       }
     }
   }

@@ -1,9 +1,12 @@
+require('../bin/compatible')
+
 const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
 const compress = require('koa-compress')
 const cors = require('@koa/cors')
 const helmet = require('koa-helmet')
 const json = require('koa-json')
+const jsonp = require('koa-safe-jsonp')
 const koaBody = require('koa-body')
 const logger = require('koa-visit-logger')
 const onerror = require('koa-onerror')
@@ -11,7 +14,6 @@ const path = require('path')
 const routerScheme = require('koa-router-scheme')
 const views = require('koa-views')
 
-require('../bin/compatible')
 const raven = require('./libs/raven')
 
 const app = new Koa()
@@ -29,6 +31,9 @@ onerror(app)
 
 // json
 app.use(json())
+
+// jsonp
+jsonp(app)
 
 app.use(helmet())
 
