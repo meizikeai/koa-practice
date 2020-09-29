@@ -33,6 +33,11 @@ https://github.com/meizikeai/koa-practice.git
 
 #### 注意事项
 
-  + 通过 pm2 启动
-  + 如果已存在任务进程，请先 pm2 delete blued-dream 或 pm2 kill 后再启动
-  + 请使用 pm2 restart /home/work/blued-dream/pm2/production.json 命令
+  + pm2启动顺序（第一次启动需注意）
+
+  ```sh 
+  $ pm2 delete blued-dream
+  $ pm2 kill
+  $ cd && cd blued-dream
+  $ pm2 restart /home/work/blued-dream/pm2/production.json
+  ```

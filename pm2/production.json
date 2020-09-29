@@ -8,8 +8,6 @@
   "ignore_watch": [
     "node_modules"
   ],
-  "instances": 0,
-  "exec_mode": "cluster",
   "env": {
     "NODE_ENV": "production"
   }
