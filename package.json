@@ -31,6 +31,7 @@
     "@blued-core/qconf": "^2.0.2",
     "@koa/cors": "^3.1.0",
     "ai-mysql-client": "^0.0.3",
+    "ai-qconf-client": "^0.0.4",
     "ai-redis-client": "^0.0.1",
     "debug": "^4.2.0",
     "handlebars": "^4.7.6",
