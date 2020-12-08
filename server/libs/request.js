@@ -36,18 +36,18 @@ async function request({
   const result = await fetch(request, option)
     .then(res => res.json())
     .then(res => {
+      logger.info({ url: request, option, result: res })
+
       if (typeof resolve === 'function') {
         return resolve(res)
       }
-
-      logger.info({ url: request, option, result: res })
     })
     .catch(error => {
+      logger.error(error, { url: request, option })
+
       if (typeof reject === 'function') {
         reject(error)
       }
-
-      logger.error(error, { url: request, option })
     })
 
   return result
