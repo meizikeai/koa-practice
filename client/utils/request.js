@@ -1,13 +1,6 @@
 // 请不要封装Promise进来
 // 客户端很少使用到，如有请直使用
-function request({
-  url,
-  data,
-  method = 'get',
-  reject = () => { },
-  resolve = () => { },
-  headers = {},
-}) {
+function request({ url, data, method = 'get', reject = () => {}, resolve = () => {}, headers = {} }) {
   const option = {
     method,
     credentials: 'include',
@@ -22,11 +15,11 @@ function request({
   }
 
   fetch(url, option)
-    .then(res => res.json())
-    .then(res => {
+    .then((res) => res.json())
+    .then((res) => {
       resolve(res)
     })
-    .catch(error => {
+    .catch((error) => {
       console.error(error)
       reject(error)
     })

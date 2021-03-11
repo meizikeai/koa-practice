@@ -9,14 +9,7 @@ const { qiniu } = require('./config')
 module.exports = {
   mode: 'production',
   entry: {
-    vendors: [
-      'react',
-      'react-dom',
-      'react-router',
-      'react-router-dom',
-      'prop-types',
-      'whatwg-fetch',
-    ],
+    vendors: ['react', 'react-dom', 'react-router', 'react-router-dom', 'prop-types', 'whatwg-fetch'],
   },
   output: {
     filename: '[name].[hash].dll.js',
@@ -55,12 +48,7 @@ module.exports = {
       SECRET_KEY: qiniu.secretKey,
       bucket: qiniu.bucket,
       path: 'web/static/',
-      include: [
-        /\.js$/,
-        /\.js.gz$/,
-        /\.css$/,
-        /\.css.gz$/,
-      ],
+      include: [/\.js$/, /\.js.gz$/, /\.css$/, /\.css.gz$/],
     }),
   ],
 }

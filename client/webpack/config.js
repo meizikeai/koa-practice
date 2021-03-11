@@ -8,7 +8,7 @@ const qiniu = {
   secretKey: 'xxxx',
 }
 
-const isDirectory = dir => {
+const isDirectory = (dir) => {
   let result = false
 
   try {
@@ -28,7 +28,7 @@ const dllPlugin = (() => {
   const result = { dll: [], manifest: [] }
   const files = fs.readdirSync(path.resolve(__dirname, '../../public/dll'))
 
-  files.forEach(file => {
+  files.forEach((file) => {
     if (/.*\.dll.js$/.test(file)) {
       result.dll.push(file)
     }
@@ -40,7 +40,7 @@ const dllPlugin = (() => {
   return result
 })()
 
-const getFolder = dir => {
+const getFolder = (dir) => {
   let vessel = []
   let result = []
   const stat = isDirectory(dir)
@@ -49,7 +49,7 @@ const getFolder = dir => {
     vessel = fs.readdirSync(dir)
   }
 
-  vessel.forEach(name => {
+  vessel.forEach((name) => {
     const file = path.join(dir, name)
     const stat = isDirectory(file)
 

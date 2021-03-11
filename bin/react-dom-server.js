@@ -7,7 +7,7 @@ const ReactDOMServer = require('react-dom/server')
 
 const isPhone = require('../server/libs/is-phone')
 
-const isDirectory = dir => {
+const isDirectory = (dir) => {
   let result = false
   try {
     const stat = fs.statSync(dir)
@@ -28,7 +28,7 @@ function ReactDOMServerMiddleware(rel) {
 
     global.KoaPractice.device = !isPhone(ctx.request.header['user-agent'])
 
-    ctx.stream = async dir => {
+    ctx.stream = async (dir) => {
       const file = path.resolve(rel, dir)
 
       try {
@@ -40,8 +40,8 @@ function ReactDOMServerMiddleware(rel) {
         // })
 
         const filepath = isDirectory(file) ? `${file}/index.js` : `${file}.js`
-        // eslint-disable-next-line import/no-dynamic-require
-        const APP = require(filepath)
+        // eslint-disable-next-line
+        const APP = require(filepath);
         const element = React.createElement(APP)
 
         stream = ReactDOMServer.renderToString(element)

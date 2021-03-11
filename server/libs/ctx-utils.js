@@ -8,7 +8,7 @@
 
 const isPhone = require('./is-phone')
 
-module.exports = options => {
+module.exports = (options) => {
   const that = options.ctx
   const userAgent = that.request.header['user-agent']
 

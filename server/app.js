@@ -15,6 +15,7 @@ const routerScheme = require('koa-router-scheme')
 const views = require('koa-views')
 
 const raven = require('./libs/raven')
+// const handleZookeeper = require('./libs/zk')
 
 const app = new Koa()
 
@@ -22,9 +23,14 @@ const app = new Koa()
 global.KoaPractice = {}
 
 // logger
-app.use(logger({
-  appName: 'koa-practice',
-}))
+app.use(
+  logger({
+    appName: 'koa-practice',
+  })
+)
+
+// zookeeper
+// handleZookeeper()
 
 // error
 onerror(app)
@@ -38,24 +44,26 @@ jsonp(app)
 app.use(helmet())
 
 // compress
-app.use(compress({
-  threshold: 2048,
-}))
+app.use(
+  compress({
+    threshold: 2048,
+  })
+)
 
 // cors
-app.use(cors({
-  credentials: true,
-  maxAge: 5 * 60,
-  origin: e => {
-    const white = [
-      'http://127.0.0.1:7000',
-    ]
+app.use(
+  cors({
+    credentials: true,
+    maxAge: 5 * 60,
+    origin: (e) => {
+      const white = ['http://127.0.0.1:7000']
 
-    if (white.includes(e.header.origin)) {
-      return e.header.origin
-    }
-  },
-}))
+      if (white.includes(e.header.origin)) {
+        return e.header.origin
+      }
+    },
+  })
+)
 
 // body, files
 app.use(koaBody({ multipart: true }))
@@ -71,10 +79,12 @@ app.use(require('koa-static')(path.join(__dirname, '../public')), {
 app.use(require('../bin/react-dom-server')(path.join(__dirname, '../client/pages')))
 
 // views
-app.use(views(path.join(__dirname, '../views'), {
-  extension: 'hbs',
-  map: { hbs: 'handlebars' },
-}))
+app.use(
+  views(path.join(__dirname, '../views'), {
+    extension: 'hbs',
+    map: { hbs: 'handlebars' },
+  })
+)
 
 // routes
 routerScheme({ app })
@@ -122,7 +132,7 @@ process.on('unhandledRejection', (reason, promise) => {
   raven.captureException(reason)
 })
 
-app.on('error', err => {
+app.on('error', (err) => {
   console.error(err)
 })
 

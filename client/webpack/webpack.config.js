@@ -44,9 +44,7 @@ const config = {
       },
     },
     runtimeChunk: true,
-    minimizer: [
-      new OptimizeCssAssetsPlugin(),
-    ],
+    minimizer: [new OptimizeCssAssetsPlugin()],
   },
   module: {
     rules: [
@@ -64,9 +62,7 @@ const config = {
             loader: 'postcss-loader',
             options: {
               postcssOptions: {
-                plugins: [
-                  ['autoprefixer'],
-                ],
+                plugins: [['autoprefixer']],
               },
             },
           },
@@ -85,9 +81,7 @@ const config = {
     // },
     // extensions: ['.js', '.jsx', '.json'],
   },
-  plugins: [
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-  ],
+  plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
 }
 
 const miniCssPlugin = new MiniCssExtractPlugin({
@@ -108,17 +102,12 @@ const qiniuPlugin = new QiniuPlugin({
   SECRET_KEY: qiniu.secretKey,
   bucket: qiniu.bucket,
   path: 'web/static/',
-  include: [
-    /\.js$/,
-    /\.js.gz$/,
-    /\.css$/,
-    /\.css.gz$/,
-  ],
+  include: [/\.js$/, /\.js.gz$/, /\.css$/, /\.css.gz$/],
 })
 
-const htmlWebpack = paths => {
-  const result = paths.map(data => {
-    const name = data.replace(/~/ig, '/')
+const htmlWebpack = (paths) => {
+  const result = paths.map((data) => {
+    const name = data.replace(/~/gi, '/')
     const userFile = path.resolve(__dirname, `../pages/${name}/index.hbs`)
     const defaultFile = path.resolve(__dirname, '../templates/index.hbs')
     const filter = fs.existsSync(userFile)
@@ -143,7 +132,7 @@ const htmlWebpack = paths => {
   return result
 }
 
-const uglifyWebpack = mode => {
+const uglifyWebpack = (mode) => {
   const option = {
     cache: true,
     parallel: true,
@@ -165,36 +154,31 @@ module.exports = (env, argv) => {
   const entry = {}
 
   if (env.all === 'true') {
-    const base = [
-      path.resolve(__dirname, '../pages/*/index.js'),
-      path.resolve(__dirname, '../pages/*/*/index.js'),
-    ]
+    const base = [path.resolve(__dirname, '../pages/*/index.js'), path.resolve(__dirname, '../pages/*/*/index.js')]
 
-    base.forEach(data => {
+    base.forEach((data) => {
       const pathList = glob.sync(path.resolve(__dirname, data))
 
-      pathList.forEach(item => {
+      pathList.forEach((item) => {
         const tplPath = `${item.split('/pages/')[1].split('/index.js')[0]}`
-        const page = tplPath.replace(/\//ig, '~')
+        const page = tplPath.replace(/\//gi, '~')
 
         entry[page] = environment.concat([item])
       })
     })
   } else {
-    const page = env.p.replace(/\//ig, '~')
+    const page = env.p.replace(/\//gi, '~')
     const dir = path.resolve(__dirname, `../pages/${env.p}`)
 
-    entry[page] = isDirectory(dir)
-      ? environment.concat([`${dir}/index.js`])
-      : environment.concat([`${dir}.js`])
+    entry[page] = isDirectory(dir) ? environment.concat([`${dir}/index.js`]) : environment.concat([`${dir}.js`])
   }
 
   config.entry = entry
   config.plugins.push(miniCssPlugin)
-  config.plugins.push(...htmlWebpack(env.all === 'true' ? Object.keys(entry) : [env.p.replace(/\//ig, '~')]))
+  config.plugins.push(...htmlWebpack(env.all === 'true' ? Object.keys(entry) : [env.p.replace(/\//gi, '~')]))
   config.optimization.minimizer.push(uglifyWebpack(argv.mode))
 
-  dll.forEach(file => {
+  dll.forEach((file) => {
     const tags = {
       append: false,
       tags: file,
@@ -207,10 +191,12 @@ module.exports = (env, argv) => {
     config.plugins.push(new HtmlWebpackTagsPlugin(tags))
   })
 
-  manifest.forEach(file => {
-    config.plugins.push(new webpack.DllReferencePlugin({
-      manifest: path.resolve(__dirname, '../../public/dll', file),
-    }))
+  manifest.forEach((file) => {
+    config.plugins.push(
+      new webpack.DllReferencePlugin({
+        manifest: path.resolve(__dirname, '../../public/dll', file),
+      })
+    )
   })
 
   if (argv.mode === 'production') {
@@ -225,15 +211,7 @@ module.exports = (env, argv) => {
     config.watch = true
     config.watchOptions = {
       aggregateTimeout: 300,
-      ignored: [
-        'build',
-        'logs',
-        'node_modules',
-        'pm2',
-        'public',
-        'server',
-        'views',
-      ],
+      ignored: ['build', 'logs', 'node_modules', 'pm2', 'public', 'server', 'views'],
     }
   }
 

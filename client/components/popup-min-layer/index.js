@@ -66,10 +66,14 @@ class PopupMinLayer extends Component {
     const { content, height, layer, model } = this.props
     return (
       <div className='model-mini-layer' style={{ display: show ? null : 'none' }}>
-        <div className="layer">
+        <div className='layer'>
           <div className='content'>{content}</div>
         </div>
-        {layer ? <div className={model ? 'layer-back white' : 'layer-back black'} style={{ height: `${height}px` }} /> : ''}
+        {layer ? (
+          <div className={model ? 'layer-back white' : 'layer-back black'} style={{ height: `${height}px` }} />
+        ) : (
+          ''
+        )}
       </div>
     )
   }
@@ -87,7 +91,7 @@ const getScrollTop = () => {
  * 设置滚动条位置
  * @param {number} top 位置
  */
-const setScrollTop = top => {
+const setScrollTop = (top) => {
   document.body.scrollTop = top
   document.documentElement.scrollTop = top
 }
@@ -104,9 +108,13 @@ function disableScroll() {
   document.body.style.overflow = 'hidden'
 
   if (toastNode) {
-    toastNode.addEventListener('touchmove', event => {
-      event.preventDefault()
-    }, false)
+    toastNode.addEventListener(
+      'touchmove',
+      (event) => {
+        event.preventDefault()
+      },
+      false
+    )
   }
 }
 
@@ -124,9 +132,13 @@ function restartScroll() {
   }
 
   if (toastNode) {
-    toastNode.removeEventListener('touchmove', event => {
-      event.preventDefault()
-    }, false)
+    toastNode.removeEventListener(
+      'touchmove',
+      (event) => {
+        event.preventDefault()
+      },
+      false
+    )
   }
 }
 
@@ -136,7 +148,7 @@ function restartScroll() {
 function createToast() {
   const toast = document.createElement('div')
   toast.setAttribute('id', `toast-${Math.floor(Math.random() * 10000000)}`)
-  toast.setAttribute('class', `toast-model-mini`)
+  toast.setAttribute('class', 'toast-model-mini')
   document.body.appendChild(toast)
   return toast
 }
@@ -162,12 +174,10 @@ export default {
       }
     }, duration)
 
-    ReactDOM.render(<PopupMinLayer
-      content={content}
-      height={document.body.clientHeight}
-      layer={layer}
-      model={model}
-      node={toast} />, toast)
+    ReactDOM.render(
+      <PopupMinLayer content={content} height={document.body.clientHeight} layer={layer} model={model} node={toast} />,
+      toast
+    )
 
     disableScroll()
   },

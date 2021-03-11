@@ -11,7 +11,7 @@ const getScrollTop = () => {
   return parseInt(total, 10)
 }
 
-const setScrollTop = top => {
+const setScrollTop = (top) => {
   document.body.scrollTop = top
   document.documentElement.scrollTop = top
 }
@@ -27,7 +27,7 @@ const scrollTo = (to, time) => {
   let i = 0
   const interval = setInterval(() => {
     i += 1
-    setScrollTop((to - from) / time * i + from)
+    setScrollTop(((to - from) / time) * i + from)
 
     if (i >= time) {
       clearInterval(interval)

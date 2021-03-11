@@ -33,7 +33,7 @@ server.on('listening', onListening)
  * Normalize a port into a number, string, or false.
  */
 
-function normalizePort (val) {
+function normalizePort(val) {
   const port = parseInt(val, 10)
 
   if (isNaN(port)) {
@@ -53,7 +53,7 @@ function normalizePort (val) {
  * Event listener for HTTP server "error" event.
  */
 
-function onError (error) {
+function onError(error) {
   if (error.syscall !== 'listen') {
     throw error
   }
@@ -76,7 +76,7 @@ function onError (error) {
  * Event listener for HTTP server "listening" event.
  */
 
-function onListening () {
+function onListening() {
   const addr = server.address()
   debug(`Server running on 127.0.0.1:${addr.port}`)
   console.log(`Server running on 127.0.0.1:${addr.port}`)

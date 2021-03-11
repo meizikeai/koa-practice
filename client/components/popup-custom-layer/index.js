@@ -98,7 +98,7 @@ const getScrollTop = () => {
  * 设置滚动条位置
  * @param {number} top 位置
  */
-const setScrollTop = top => {
+const setScrollTop = (top) => {
   document.body.scrollTop = top
   document.documentElement.scrollTop = top
 }
@@ -146,7 +146,7 @@ function createToast() {
   const toast = document.createElement('div')
   toast.setAttribute('id', `toast-${Math.floor(Math.random() * 10000000)}`)
   document.body.appendChild(toast)
-  toast.setAttribute('class', `toast-marker toast-model-custom`)
+  toast.setAttribute('class', 'toast-marker toast-model-custom')
   return toast
 }
 
@@ -164,13 +164,17 @@ export default {
       }, duration)
     }
 
-    ReactDOM.render(<PopupCustomLayer
-      content={content}
-      confirm={confirm}
-      handler={handler}
-      height={document.body.clientHeight}
-      layer={layer}
-      node={toast} />, toast)
+    ReactDOM.render(
+      <PopupCustomLayer
+        content={content}
+        confirm={confirm}
+        handler={handler}
+        height={document.body.clientHeight}
+        layer={layer}
+        node={toast}
+      />,
+      toast
+    )
 
     disableScroll(scroll)
   },

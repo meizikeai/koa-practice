@@ -75,7 +75,7 @@ class PopupLayer extends Component {
     // clearTimeout(this.timer)
   }
 
-  hide = pass => {
+  hide = (pass) => {
     const { validate, cancel } = this.props
 
     restartScroll()
@@ -101,36 +101,23 @@ class PopupLayer extends Component {
               <div className='title'>{title}</div>
             </div>
             <div className='content'>{content}</div>
-            {
-              confirm && (
-                <div className='footer'>
-                  <div
-                    className='validate'
-                    onClick={this.hide.bind(this, true)}
-                    role="presentation">
-                    {validate.txt}
-                  </div>
-                  <div
-                    className='cancel'
-                    onClick={this.hide.bind(this, false)}
-                    role="presentation">
-                    {cancel.txt}
-                  </div>
+            {confirm && (
+              <div className='footer'>
+                <div className='validate' onClick={this.hide.bind(this, true)} role='presentation'>
+                  {validate.txt}
                 </div>
-              )
-            }
-            {
-              !confirm && (
-                <div className='footer'>
-                  <div
-                    className='validate'
-                    onClick={this.hide.bind(this, true)}
-                    role="presentation">
-                    {validate.txt}
-                  </div>
+                <div className='cancel' onClick={this.hide.bind(this, false)} role='presentation'>
+                  {cancel.txt}
                 </div>
-              )
-            }
+              </div>
+            )}
+            {!confirm && (
+              <div className='footer'>
+                <div className='validate' onClick={this.hide.bind(this, true)} role='presentation'>
+                  {validate.txt}
+                </div>
+              </div>
+            )}
           </div>
         </div>
         {layer ? <div className='layer-back' style={{ height: `${height}px` }} /> : ''}
@@ -151,7 +138,7 @@ const getScrollTop = () => {
  * 设置滚动条位置
  * @param {number} top 位置
  */
-const setScrollTop = top => {
+const setScrollTop = (top) => {
   document.body.scrollTop = top
   document.documentElement.scrollTop = top
 }
@@ -198,7 +185,7 @@ function restartScroll() {
 function createToast() {
   const toast = document.createElement('div')
   toast.setAttribute('id', `toast-${Math.floor(Math.random() * 10000000)}`)
-  toast.setAttribute('class', `toast-marker toast-model-layer`)
+  toast.setAttribute('class', 'toast-marker toast-model-layer')
   document.body.appendChild(toast)
   return toast
 }
@@ -217,15 +204,19 @@ export default {
       }, duration)
     }
 
-    ReactDOM.render(<PopupLayer
-      title={title}
-      content={content}
-      confirm={confirm}
-      cancel={cancel}
-      height={document.body.clientHeight}
-      validate={validate}
-      layer={layer}
-      node={toast} />, toast)
+    ReactDOM.render(
+      <PopupLayer
+        title={title}
+        content={content}
+        confirm={confirm}
+        cancel={cancel}
+        height={document.body.clientHeight}
+        validate={validate}
+        layer={layer}
+        node={toast}
+      />,
+      toast
+    )
 
     disableScroll()
   },

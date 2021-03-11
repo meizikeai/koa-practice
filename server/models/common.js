@@ -2,11 +2,26 @@ const logger = require('../libs/logger')
 const { mysqlClient, redisClient } = require('../libs/connect')
 
 module.exports = {
-  async getAnchors() {
-    const commonMySQL = mysqlClient('commonMySQL')
+  // 数据结构
+  // CREATE TABLE `test_user` (
+  //   `id` int NOT NULL AUTO_INCREMENT COMMENT '序列号',
+  //   `email` varchar(50) NOT NULL DEFAULT '' COMMENT '用户帐号',
+  //   `name` varchar(20) NOT NULL DEFAULT '' COMMENT '用户姓名',
+  //   `type` int NOT NULL DEFAULT '1' COMMENT '用户类型',
+  //   `status` int NOT NULL DEFAULT '1' COMMENT '帐户状态',
+  //   `cipher` int NOT NULL DEFAULT '1' COMMENT '密码修改提示',
+  //   `salt` varchar(256) NOT NULL DEFAULT '' COMMENT '随机密钥的一半',
+  //   `password` varchar(256) NOT NULL DEFAULT '' COMMENT '用户密码',
+  //   `createtime` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
+  //   PRIMARY KEY (`id`),
+  //   UNIQUE KEY `email` (`email`)
+  // ) ENGINE=InnoDB AUTO_INCREMENT=1000002 DEFAULT CHARSET=utf8;
 
-    const selectSQL = `SELECT uid FROM ACTIVITY_TEST limit 0 ,10`
-    const anchors = await commonMySQL.query(selectSQL).catch(err => {
+  async getAnchors() {
+    const commonMySQL = mysqlClient('default')
+
+    const selectSQL = `SELECT * FROM test_user limit 0 ,10`
+    const anchors = await commonMySQL.query(selectSQL).catch((err) => {
       logger.error(err, { tips: 'test -> query error' })
     })
 
@@ -15,9 +30,9 @@ module.exports = {
     return anchors
   },
   async getUser() {
-    const commonRedis = redisClient('commonRedis')
+    const commonRedis = redisClient('default')
 
-    const anchors = await commonRedis.hgetall('u:113').catch(err => {
+    const anchors = await commonRedis.hgetall('u:113').catch((err) => {
       logger.error(err, { tips: 'test -> query error' })
     })
 
