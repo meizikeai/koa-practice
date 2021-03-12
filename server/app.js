@@ -41,12 +41,17 @@ app.use(json())
 // jsonp
 jsonp(app)
 
-app.use(helmet())
-
 // compress
 app.use(
   compress({
     threshold: 2048,
+  })
+)
+
+// helmet
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
   })
 )
 

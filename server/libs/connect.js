@@ -1,5 +1,5 @@
-const createMySQLClient = require('./mysql')
-const createRedisClient = require('./redis')
+const createMySQLClient = require('ai-mysql-client')
+const createRedisClient = require('ai-redis-client')
 const releaseMySQL = require('../config/release-mysql')
 const releaseRedis = require('../config/release-redis')
 const testMySQL = require('../config/test-mysql')

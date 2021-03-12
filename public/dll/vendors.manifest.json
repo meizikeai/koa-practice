@@ -1,5 +1,5 @@
 {
-  "name": "vendors_40d2abc03eae2a5d6bd0",
+  "name": "vendors_c62a3df83ad963edb047",
   "content": {
     "./node_modules/react/index.js": {
       "id": 0,
@@ -115,14 +115,8 @@
         "providedExports": true
       }
     },
-    "./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js": {
+    "./node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js": {
       "id": 13,
-      "buildMeta": {
-        "providedExports": true
-      }
-    },
-    "./node_modules/resolve-pathname/esm/resolve-pathname.js": {
-      "id": 14,
       "buildMeta": {
         "exportsType": "namespace",
         "providedExports": [
@@ -130,7 +124,13 @@
         ]
       }
     },
-    "./node_modules/value-equal/esm/value-equal.js": {
+    "./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js": {
+      "id": 14,
+      "buildMeta": {
+        "providedExports": true
+      }
+    },
+    "./node_modules/resolve-pathname/esm/resolve-pathname.js": {
       "id": 15,
       "buildMeta": {
         "exportsType": "namespace",
@@ -139,68 +139,77 @@
         ]
       }
     },
-    "./node_modules/react/cjs/react.production.min.js": {
-      "id": 17,
+    "./node_modules/value-equal/esm/value-equal.js": {
+      "id": 16,
       "buildMeta": {
-        "providedExports": true
+        "exportsType": "namespace",
+        "providedExports": [
+          "default"
+        ]
       }
     },
-    "./node_modules/react-dom/index.js": {
+    "./node_modules/react/cjs/react.production.min.js": {
       "id": 18,
       "buildMeta": {
         "providedExports": true
       }
     },
-    "./node_modules/react-dom/cjs/react-dom.production.min.js": {
+    "./node_modules/react-dom/index.js": {
       "id": 19,
       "buildMeta": {
         "providedExports": true
       }
     },
-    "./node_modules/scheduler/index.js": {
+    "./node_modules/react-dom/cjs/react-dom.production.min.js": {
       "id": 20,
       "buildMeta": {
         "providedExports": true
       }
     },
-    "./node_modules/scheduler/cjs/scheduler.production.min.js": {
+    "./node_modules/scheduler/index.js": {
       "id": 21,
       "buildMeta": {
         "providedExports": true
       }
     },
-    "./node_modules/prop-types/factoryWithThrowingShims.js": {
+    "./node_modules/scheduler/cjs/scheduler.production.min.js": {
       "id": 22,
       "buildMeta": {
         "providedExports": true
       }
     },
-    "./node_modules/prop-types/lib/ReactPropTypesSecret.js": {
+    "./node_modules/prop-types/factoryWithThrowingShims.js": {
       "id": 23,
       "buildMeta": {
         "providedExports": true
       }
     },
-    "./node_modules/webpack/buildin/global.js": {
+    "./node_modules/prop-types/lib/ReactPropTypesSecret.js": {
       "id": 24,
       "buildMeta": {
         "providedExports": true
       }
     },
-    "./node_modules/react-router/node_modules/isarray/index.js": {
+    "./node_modules/webpack/buildin/global.js": {
       "id": 25,
       "buildMeta": {
         "providedExports": true
       }
     },
-    "./node_modules/react-is/cjs/react-is.production.min.js": {
+    "./node_modules/react-router/node_modules/isarray/index.js": {
       "id": 26,
       "buildMeta": {
         "providedExports": true
       }
     },
-    "./node_modules/react-router-dom/esm/react-router-dom.js": {
+    "./node_modules/react-is/cjs/react-is.production.min.js": {
       "id": 27,
+      "buildMeta": {
+        "providedExports": true
+      }
+    },
+    "./node_modules/react-router-dom/esm/react-router-dom.js": {
+      "id": 28,
       "buildMeta": {
         "exportsType": "namespace",
         "providedExports": [
@@ -226,7 +235,7 @@
       }
     },
     "./node_modules/whatwg-fetch/fetch.js": {
-      "id": 28,
+      "id": 29,
       "buildMeta": {
         "exportsType": "namespace",
         "providedExports": [
