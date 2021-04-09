@@ -1,5 +1,6 @@
 const logger = require('../libs/logger')
 const { mysqlClient, redisClient } = require('../libs/connect')
+const mysql = require('../libs/mysql')
 
 module.exports = {
   // 数据结构
@@ -39,5 +40,36 @@ module.exports = {
     logger.info({ notice: anchors })
 
     return anchors
+  },
+  // 尝试事务
+  tryBegin() {
+    const pool = mysql({
+      master: ['127.0.0.1:3306'],
+      username: 'root',
+      password: 'yintai@123',
+      database: 'test',
+    })
+
+    // pool.query('SELECT * FROM test_user limit 0 ,10', '', (err, res) => {
+    //   console.log(res)
+    // })
+
+    pool.getConnection((err, conn) => {
+      if (err) {
+        throw err
+      }
+
+      conn.beginTransaction((err) => {
+        if (err) return done(err)
+
+        conn.query('SELECT * FROM test_user limit 0 ,10', '', (err, res) => {
+          if (err) {
+            throw err
+          }
+
+          console.log(res)
+        })
+      })
+    })
   },
 }
