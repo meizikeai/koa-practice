@@ -60,7 +60,9 @@ module.exports = {
       }
 
       conn.beginTransaction((err) => {
-        if (err) return done(err)
+        if (err) {
+          throw err
+        }
 
         conn.query('SELECT * FROM test_user limit 0 ,10', '', (err, res) => {
           if (err) {
