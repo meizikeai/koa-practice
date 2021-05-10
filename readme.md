@@ -39,9 +39,9 @@ https://github.com/meizikeai/koa-practice.git
 
   + pm2启动顺序（第一次启动需注意）
 
-  ```sh 
-  $ pm2 delete blued-dream
+``` sh
+  $ pm2 delete koa-practice
   $ pm2 kill
-  $ cd && cd blued-dream
-  $ pm2 restart /home/work/blued-dream/pm2/production.json
+  $ cd && cd koa-practice
+  $ pm2 restart /home/work/koa-practice/pm2/production.json
   ```
