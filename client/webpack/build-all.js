@@ -1,6 +1,6 @@
 const shelljs = require('shelljs')
 
-const child = shelljs.exec('webpack --mode production --config ./client/webpack/webpack.config.js --env.all=true', {
+const child = shelljs.exec('webpack --mode=production --config ./client/webpack/webpack.config.js --env all=true', {
   async: true,
 })
 

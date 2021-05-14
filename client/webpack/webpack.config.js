@@ -3,14 +3,13 @@ const path = require('path')
 const glob = require('glob')
 const webpack = require('webpack')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const QiniuPlugin = require('qiniu-webpack-plugin')
-const UglifyWebpackPlugin = require('uglifyjs-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const { dll, isDirectory, manifest, qiniu } = require('./config')
+const { dll, isDirectory, manifest } = require('./config')
 
 const environment = ['core-js/es/map', 'core-js/es/set']
 
@@ -44,7 +43,7 @@ const config = {
       },
     },
     runtimeChunk: true,
-    minimizer: [new OptimizeCssAssetsPlugin()],
+    minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
   },
   module: {
     rules: [
@@ -75,11 +74,11 @@ const config = {
     // jquery: 'jQuery',
   },
   resolve: {
-    // alias: {
-    //   '@components': path.resolve(__dirname, '../components'),
-    //   '@utils': path.resolve(__dirname, '../utils'),
-    // },
-    // extensions: ['.js', '.jsx', '.json'],
+    alias: {
+      '@components': path.resolve(__dirname, '../components'),
+      '@utils': path.resolve(__dirname, '../utils'),
+    },
+    extensions: ['.js', '.jsx', '.json'],
   },
   plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
 }
@@ -95,14 +94,6 @@ const compressionPlugin = new CompressionWebpackPlugin({
   test: /\.js$|\.css$|\.html$/,
   threshold: 10240,
   minRatio: 0.8,
-})
-
-const qiniuPlugin = new QiniuPlugin({
-  ACCESS_KEY: qiniu.accessKey,
-  SECRET_KEY: qiniu.secretKey,
-  bucket: qiniu.bucket,
-  path: 'web/static/',
-  include: [/\.js$/, /\.js.gz$/, /\.css$/, /\.css.gz$/],
 })
 
 const htmlWebpack = (paths) => {
@@ -132,24 +123,6 @@ const htmlWebpack = (paths) => {
   return result
 }
 
-const uglifyWebpack = (mode) => {
-  const option = {
-    cache: true,
-    parallel: true,
-    sourceMap: true,
-  }
-
-  if (mode === 'production') {
-    option.uglifyOptions = {
-      compress: {
-        drop_console: true,
-      },
-    }
-  }
-
-  return new UglifyWebpackPlugin(option)
-}
-
 module.exports = (env, argv) => {
   const entry = {}
 
@@ -176,7 +149,6 @@ module.exports = (env, argv) => {
   config.entry = entry
   config.plugins.push(miniCssPlugin)
   config.plugins.push(...htmlWebpack(env.all === 'true' ? Object.keys(entry) : [env.p.replace(/\//gi, '~')]))
-  config.optimization.minimizer.push(uglifyWebpack(argv.mode))
 
   dll.forEach((file) => {
     const tags = {
@@ -201,11 +173,11 @@ module.exports = (env, argv) => {
 
   if (argv.mode === 'production') {
     config.devtool = false
-    config.output.publicPath = `${qiniu.cdnBase}/web/static/`
+    // config.output.publicPath = `${sdn}/web/static/`
     config.optimization.minimize = true
     config.plugins.push(new CleanWebpackPlugin())
     config.plugins.push(compressionPlugin)
-    config.plugins.push(qiniuPlugin)
+    // config.plugins.push( 上传至 腾讯云、阿里云、UCloud、AWS 请自行封插件 )
   } else {
     config.devtool = 'inline-source-map'
     config.watch = true
