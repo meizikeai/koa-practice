@@ -5,7 +5,7 @@
   "private": true,
   "main": "bin/server.js",
   "engines": {
-    "node": ">=8.11.2"
+    "node": ">=12.0.0"
   },
   "scripts": {
     "start": "NODE_ENV='local' nodemon bin/server.js",
@@ -15,7 +15,8 @@
     "build": "node client/webpack/build.js",
     "build-all": "node client/webpack/build-all.js",
     "webpack-dll": "webpack --config client/webpack/webpack.dll.js",
-    "check": "eslint --ext .js,.jsx . --fix"
+    "check": "eslint --ext .js,.jsx . --fix",
+    "prepare": "husky install"
   },
   "keywords": [
     "koa",
@@ -97,11 +98,5 @@
     "webpack": "^5.37.0",
     "webpack-cli": "^4.7.0",
     "whatwg-fetch": "^3.6.2"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "npm run check"
-    }
   }
 }
