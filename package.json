@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@koa/cors": "^3.1.0",
-    "ai-mysql-client": "^0.0.5",
+    "ai-mysql-client": "^0.0.6",
     "ai-redis-client": "^0.0.3",
     "debug": "^4.3.1",
     "handlebars": "^4.7.7",
@@ -88,7 +88,6 @@
     "postcss": "^8.2.15",
     "postcss-loader": "^5.2.0",
     "prettier": "^2.3.0",
-    "qiniu-webpack-plugin": "^0.4.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router": "^5.2.0",
