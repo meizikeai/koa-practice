@@ -1,6 +1,5 @@
 const logger = require('../libs/logger')
-const { mysqlClient, redisClient } = require('../libs/connect')
-const mysql = require('../libs/mysql')
+const { mysqlClient, redisClient, serverClient } = require('../libs/connect')
 
 module.exports = {
   // 数据结构
@@ -19,58 +18,58 @@ module.exports = {
   // ) ENGINE=InnoDB AUTO_INCREMENT=1000002 DEFAULT CHARSET=utf8;
 
   async getAnchors() {
-    const commonMySQL = mysqlClient('default')
+    const testhost = serverClient('send')
+    console.log(`http://${testhost}`)
+
+    const commonMySQL = mysqlClient('default.master')
 
     const selectSQL = `SELECT * FROM test_user limit 0 ,10`
-    const anchors = await commonMySQL.query(selectSQL).catch((err) => {
+    const [result] = await commonMySQL.query(selectSQL).catch((err) => {
       logger.error(err, { tips: 'test -> query error' })
     })
 
-    logger.info({ notice: anchors })
+    logger.info({ notice: result })
 
-    return anchors
+    return result
   },
   async getUser() {
-    const commonRedis = redisClient('default')
+    const defaultRedis = redisClient('default.master')
 
-    const anchors = await commonRedis.hgetall('u:113').catch((err) => {
+    const anchors = await defaultRedis.hgetall('u:113').catch((err) => {
       logger.error(err, { tips: 'test -> query error' })
     })
 
     logger.info({ notice: anchors })
+
+    // 使用 pipeline
+    const pipeline = defaultRedis.pipeline()
+
+    pipeline.hset('u:133', 'test', '测试一下')
+    // pipeline.hdel('u:133', 'test')
+    pipeline.hget('u:133', 'test')
+    pipeline.exec((err, result) => {
+      console.log(err, result)
+    })
 
     return anchors
   },
   // 尝试事务
-  tryBegin() {
-    const pool = mysql({
-      master: ['127.0.0.1:3306'],
-      username: 'root',
-      password: 'yintai@123',
-      database: 'test',
-    })
+  async tryBegin() {
+    const pool = mysqlClient('default.master')
 
-    // pool.query('SELECT * FROM test_user limit 0 ,10', '', (err, res) => {
-    //   console.log(res)
-    // })
+    pool.getConnection().then((promiseConnection) => {
+      var conn = promiseConnection.connection
 
-    pool.getConnection((err, conn) => {
-      if (err) {
-        throw err
-      }
-
-      conn.beginTransaction((err) => {
-        if (err) {
-          throw err
-        }
-
-        conn.query('SELECT * FROM test_user limit 0 ,10', '', (err, res) => {
-          if (err) {
-            throw err
-          }
-
-          console.log(res)
+      conn.beginTransaction(async (err) => {
+        const [a] = await pool.query('SELECT * FROM test_user limit 0 ,10').catch((err) => {
+          logger.error(err, { tips: 'test -> query error' })
         })
+        logger.info({ a: 1, notice: a })
+
+        const [b] = await pool.query('SELECT * FROM test_user limit 0 ,10').catch((err) => {
+          logger.error(err, { tips: 'test -> query error' })
+        })
+        logger.info({ b: 1, notice: b })
       })
     })
   },

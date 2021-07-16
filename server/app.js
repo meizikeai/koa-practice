@@ -1,6 +1,7 @@
 require('../bin/compatible')
 
 const Koa = require('koa')
+// const apm = require('elastic-apm-node')
 const bodyParser = require('koa-bodyparser')
 const compress = require('koa-compress')
 const cors = require('@koa/cors')
@@ -14,10 +15,12 @@ const path = require('path')
 const routerScheme = require('koa-router-scheme')
 const views = require('koa-views')
 
-const raven = require('./libs/raven')
-// const handleZookeeper = require('./libs/zk')
+const { handleZookeeper } = require('./libs/zookeeper')
 
 const app = new Koa()
+
+// zookeeper
+handleZookeeper()
 
 // global
 global.KoaPractice = {}
@@ -28,9 +31,6 @@ app.use(
     appName: 'koa-practice',
   })
 )
-
-// zookeeper
-// handleZookeeper()
 
 // error
 onerror(app)
@@ -129,12 +129,10 @@ app.use(async (ctx, next) => {
 // error-handling
 process.on('uncaughtException', (err, origin) => {
   console.error(`${process.stderr.fd}, Caught exception: ${err}, Exception origin: ${origin}`)
-  raven.captureException(err)
 })
 
 process.on('unhandledRejection', (reason, promise) => {
   console.error('Unhandled Rejection at:', promise, 'reason:', reason)
-  raven.captureException(reason)
 })
 
 app.on('error', (err) => {

@@ -1,20 +1,20 @@
-const mysql = require('mysql2')
-const releaseMySQL = require('../config/release-mysql')
-const testMySQL = require('../config/test-mysql')
+const Redis = require('ioredis')
+const releaseRedis = require('../config/release-redis')
+const testRedis = require('../config/test-redis')
 const { getRandomSubscript } = require('../libs/random')
 const { handleCache, getCache } = require('../libs/cache-store')
 const { isPro, isLocalPro } = require('../config/env')
 
-function handleMySQL(key) {
-  let datum = testMySQL
+function handleRedis(key) {
+  let datum = testRedis
 
   if (isPro || isLocalPro) {
-    datum = releaseMySQL
+    datum = releaseRedis
   }
 
   const result = {}
-  const [where, branch] = key.split('.')
-  const zk = getCache('mysql')
+  const [where] = key.split('.')
+  const zk = getCache('redis')
 
   datum = Object.assign(datum, zk)
 
@@ -28,30 +28,22 @@ function handleMySQL(key) {
     }
 
     const config = datum[k]
-    let data = config.master
-
-    if (branch === 'slave') {
-      data = config.slave
-    }
+    const data = config.master
 
     result[key] = []
 
     for (let i = 0; i < data.length; i++) {
       const element = data[i]
       const [host, port] = element.split(':')
-      const pool = mysql.createPool({
+      const option = {
         host: host,
-        port: Number(port) || 3306,
-        user: config.username,
+        port: Number(port) || 6379,
         password: config.password,
-        database: config.database,
-        connectionLimit: config.connection || 100,
-        connectTimeout: 5000,
-        waitForConnections: true,
-      })
-      const client = pool.promise()
+        family: config.family || 4,
+        db: config.db,
+      }
 
-      result[key][i] = client
+      result[key][i] = new Redis(option)
     }
   }
 
@@ -59,8 +51,8 @@ function handleMySQL(key) {
 }
 
 function getClient(key) {
-  const pool = handleCache(`mysql.${key}`, () => {
-    const client = handleMySQL(key)
+  const pool = handleCache(`redis.${key}`, () => {
+    const client = handleRedis(key)
     const index = getRandomSubscript(client[key].length)
 
     return client[key][index]

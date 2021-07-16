@@ -1,5 +1,5 @@
 const ctxUtils = require('../libs/ctx-utils')
-// const { getAnchors, getUser, tryBegin } = require('../models/common')
+const { getAnchors, getUser, tryBegin } = require('../models/common')
 
 module.exports = {
   async home(ctx) {
@@ -14,11 +14,11 @@ module.exports = {
       }),
     }
 
-    // await getAnchors()
-    // await getUser()
+    await getAnchors()
+    await getUser()
 
     // 事务
-    // tryBegin()
+    tryBegin()
 
     await ctx.render('index')
   },

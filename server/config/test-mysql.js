@@ -5,6 +5,7 @@ const datum = {
     username: 'root',
     password: 'yintai@123',
     database: 'test',
+    connection: 100,
   },
 }
 

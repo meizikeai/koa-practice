@@ -7,6 +7,7 @@
 const http = require('http')
 const debug = require('debug')('demo:server')
 const app = require('../server/app')
+const { awaitZookeeper } = require('../server/libs/zookeeper')
 
 /**
  * Get port from environment and store in Express.
@@ -25,9 +26,11 @@ const server = http.createServer(app.callback())
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port)
-server.on('error', onError)
-server.on('listening', onListening)
+awaitZookeeper().then(() => {
+  server.listen(port)
+  server.on('error', onError)
+  server.on('listening', onListening)
+})
 
 /**
  * Normalize a port into a number, string, or false.
