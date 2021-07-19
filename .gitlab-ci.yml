@@ -1,8 +1,8 @@
 before_script:
-  - git clone https://github.com/meizikeai/gitlab-shell-practice.git
+  - git clone https://github.com/meizikeai/gitlab-node-shell.git
 
 # after_script:
-# - rm -rf gitlab-shell-practice
+# - rm -rf gitlab-node-shell
 
 .access_branch_template: &access_branch
   only:
@@ -12,7 +12,7 @@ before_script:
 variables:
   deploys: /home/work/koa-practice
   project: koa-practice
-  scripts: blued-yaml-shell
+  scripts: gitlab-node-shell
   dingtalk: https://oapi.dingtalk.com/robot/send?access_token=XXX
   feishu: https://open.feishu.cn/open-apis/bot/hook/XXX
 
