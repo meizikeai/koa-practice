@@ -83,7 +83,7 @@
     "husky": "^7.0.1",
     "inquirer": "^8.1.2",
     "mini-css-extract-plugin": "^2.1.0",
-    "node-sass": "^6.0.1",
+    "node-sass": "^7.0.0",
     "nodemon": "^2.0.12",
     "postcss": "^8.3.5",
     "postcss-loader": "^6.1.1",
