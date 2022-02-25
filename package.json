@@ -15,8 +15,7 @@
     "build": "node client/webpack/build.js",
     "build-all": "node client/webpack/build-all.js",
     "webpack-dll": "webpack --config client/webpack/webpack.dll.js",
-    "check": "eslint --ext .js,.jsx . --fix",
-    "prepare": "husky install"
+    "check": "eslint --ext .js,.jsx . --fix"
   },
   "keywords": [
     "koa",
@@ -31,7 +30,6 @@
   "dependencies": {
     "@koa/cors": "^3.1.0",
     "debug": "^4.3.3",
-    "elastic-apm-node": "^3.29.0",
     "handlebars": "^4.7.7",
     "ioredis": "^4.28.5",
     "koa": "^2.13.4",
@@ -62,12 +60,9 @@
     "@babel/preset-react": "^7.16.7",
     "@babel/register": "^7.17.0",
     "@babel/runtime-corejs3": "^7.17.2",
-    "@commitlint/cli": "^16.2.1",
-    "@commitlint/config-conventional": "^16.2.1",
     "autoprefixer": "^10.4.2",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.3",
-    "clean-webpack-plugin": "^4.0.0",
     "compression-webpack-plugin": "^9.2.0",
     "core-js": "^3.21.1",
     "css-loader": "^6.6.0",
@@ -80,7 +75,6 @@
     "glob": "^7.2.0",
     "html-webpack-plugin": "^5.5.0",
     "html-webpack-tags-plugin": "^3.0.2",
-    "husky": "^7.0.4",
     "inquirer": "^8.2.0",
     "mini-css-extract-plugin": "^2.5.3",
     "node-sass": "^7.0.1",

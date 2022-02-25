@@ -1,7 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   mode: 'production',
@@ -13,6 +12,7 @@ module.exports = {
     library: '[name]_[fullhash]',
     path: path.resolve(__dirname, '../../public/dll'),
     // publicPath: `${cdn}/web/static/`,
+    clean: true,
   },
   module: {
     rules: [
@@ -24,8 +24,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(),
-
     new webpack.DllPlugin({
       format: true,
       name: '[name]_[fullhash]',

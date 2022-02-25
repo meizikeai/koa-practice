@@ -1,7 +1,6 @@
 require('../bin/compatible')
 
 const Koa = require('koa')
-// const apm = require('elastic-apm-node')
 const bodyParser = require('koa-bodyparser')
 const compress = require('koa-compress')
 const cors = require('@koa/cors')
