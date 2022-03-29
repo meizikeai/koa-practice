@@ -14,8 +14,8 @@ module.exports = {
       }),
     }
 
-    await getAnchors()
-    await getUser()
+    // await getAnchors()
+    // await getUser()
 
     // 事务
     tryBegin()

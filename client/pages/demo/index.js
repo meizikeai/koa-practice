@@ -42,14 +42,14 @@ class App extends Component {
 
     return (
       <div className={`${device ? 'demo-pc' : 'demo'}`}>
-        <h1>Hello Demo!</h1>
-        <p>Welcome to Demo!</p>
-        <div className='click'>
+        <h1 key='1'>Hello Demo!</h1>
+        <p key='2'>Welcome to Demo!</p>
+        <div key='3' className='click'>
           You clicked
-          <span>{index}</span>
+          <span key='31'>{index}</span>
           times
         </div>
-        <button type='button' onClick={this.handleClick}>
+        <button key='32' type='button' onClick={this.handleClick}>
           Click me
         </button>
       </div>

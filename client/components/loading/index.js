@@ -7,7 +7,7 @@ const Loading = (props) => {
 
   return (
     <div className='model-load'>
-      <div style={color ? { backgroundColor: color } : ''} />
+      <div key='notunique' style={color ? { backgroundColor: color } : ''} />
     </div>
   )
 }

@@ -9,6 +9,6 @@ const dev = process.env.NODE_DEV
 module.exports.isLocalPro = dev === 'localPro'
 
 // zookeeper
-module.exports.useZookeeper = true
+module.exports.useZookeeper = false
 module.exports.release = ['10.10.182.158:2181', '10.10.101.151:2181', '10.10.102.25:2181']
-module.exports.test = ['10.9.158.210:2181']
+module.exports.test = ['10.9.158.210:2181', '10.9.114.167:2181', '10.9.105.4:2181']
