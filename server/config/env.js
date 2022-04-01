@@ -10,5 +10,5 @@ module.exports.isLocalPro = dev === 'localPro'
 
 // zookeeper
 module.exports.useZookeeper = false
-module.exports.release = ['10.10.182.158:2181', '10.10.101.151:2181', '10.10.102.25:2181']
-module.exports.test = ['10.9.158.210:2181', '10.9.114.167:2181', '10.9.105.4:2181']
+module.exports.release = ['127.0.0.1:2181', '127.0.0.1:2181', '127.0.0.1:2181']
+module.exports.test = ['127.0.0.1:2181', '127.0.0.1:2181', '127.0.0.1:2181']
