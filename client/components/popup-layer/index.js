@@ -18,7 +18,7 @@
  *      // do something
  *   },
  *  },
- *  content: '端外暂不支持领取会员，请下载Blued APP后再试〜',
+ *  content: '端外暂不支持领取会员，请下载Love APP后再试〜',
  * })
  */
 

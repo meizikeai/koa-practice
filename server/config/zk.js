@@ -1,12 +1,12 @@
 const zk = {
   mysql: {
-    activity: '/blued/backend/udb/livedata_activity',
+    test: '/kiss/love/test',
   },
   redis: {
-    users: '/blued/backend/umem/users',
+    test: '/kiss/love/test',
   },
   server: {
-    send: '/blued/service/hermes/send',
+    test: '/kiss/love/test',
   },
 }
 

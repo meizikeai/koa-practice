@@ -19,7 +19,7 @@ const { handleZookeeper } = require('./libs/zookeeper')
 const app = new Koa()
 
 // zookeeper
-handleZookeeper()
+// handleZookeeper()
 
 // global
 global.KoaPractice = {}
