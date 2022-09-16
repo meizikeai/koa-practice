@@ -24,22 +24,6 @@ import './index.css'
 let popupMinLayerScrollTop = 0
 
 class PopupMinLayer extends Component {
-  static propTypes = {
-    content: PropTypes.string,
-    height: PropTypes.number,
-    layer: PropTypes.bool,
-    model: PropTypes.bool,
-    node: PropTypes.object,
-    show: PropTypes.bool,
-  }
-
-  static defaultProps = {
-    content: '',
-    layer: true,
-    model: true,
-    show: true,
-  }
-
   constructor(props) {
     super(props)
     const { show } = this.props
@@ -55,10 +39,6 @@ class PopupMinLayer extends Component {
       document.body.removeChild(node)
     }
     return false
-  }
-
-  componentWillUnmount = () => {
-    // clearTimeout(this.timer)
   }
 
   render() {
@@ -77,6 +57,22 @@ class PopupMinLayer extends Component {
       </div>
     )
   }
+}
+
+PopupMinLayer.propTypes = {
+  content: PropTypes.string,
+  height: PropTypes.number,
+  layer: PropTypes.bool,
+  model: PropTypes.bool,
+  node: PropTypes.object,
+  show: PropTypes.bool,
+}
+
+PopupMinLayer.defaultProps = {
+  content: '',
+  layer: true,
+  model: true,
+  show: true,
 }
 
 /**

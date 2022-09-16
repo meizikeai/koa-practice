@@ -30,28 +30,6 @@ import './index.css'
 let popupLayerScrollTop = 0
 
 class PopupLayer extends Component {
-  static propTypes = {
-    show: PropTypes.bool,
-    title: PropTypes.string,
-    content: PropTypes.string,
-    confirm: PropTypes.bool,
-    layer: PropTypes.bool,
-    cancel: PropTypes.object,
-    validate: PropTypes.object,
-    node: PropTypes.object,
-    height: PropTypes.number,
-  }
-
-  static defaultProps = {
-    show: true,
-    title: '温馨提示',
-    content: '',
-    confirm: false,
-    layer: true,
-    cancel: { txt: '取消', callback: null },
-    validate: { txt: '确定', callback: null },
-  }
-
   constructor(props) {
     super(props)
     const { show } = this.props
@@ -69,10 +47,6 @@ class PopupLayer extends Component {
       document.body.removeChild(node)
     }
     return false
-  }
-
-  componentWillUnmount = () => {
-    // clearTimeout(this.timer)
   }
 
   hide = (pass) => {
@@ -124,6 +98,28 @@ class PopupLayer extends Component {
       </div>
     )
   }
+}
+
+PopupLayer.propTypes = {
+  show: PropTypes.bool,
+  title: PropTypes.string,
+  content: PropTypes.string,
+  confirm: PropTypes.bool,
+  layer: PropTypes.bool,
+  cancel: PropTypes.object,
+  validate: PropTypes.object,
+  node: PropTypes.object,
+  height: PropTypes.number,
+}
+
+PopupLayer.defaultProps = {
+  show: true,
+  title: '温馨提示',
+  content: '',
+  confirm: false,
+  layer: true,
+  cancel: { txt: '取消', callback: null },
+  validate: { txt: '确定', callback: null },
 }
 
 /**

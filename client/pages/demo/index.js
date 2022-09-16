@@ -10,10 +10,6 @@ import PopupMinLayer from '../../components/popup-min-layer'
 import './index.scss'
 
 class App extends Component {
-  static propTypes = {
-    device: PropTypes.bool,
-  }
-
   constructor(props) {
     super(props)
     this.state = { index: 0 }
@@ -70,6 +66,10 @@ class App extends Component {
 if (typeof window !== 'undefined') {
   const config = window.CONFIG || {}
   hydrate(<App {...config} />, document.querySelector('#app'))
+}
+
+App.propTypes = {
+  device: PropTypes.bool,
 }
 
 module.exports = App
