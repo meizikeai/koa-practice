@@ -18,7 +18,7 @@ module.exports = {
     // await getUser()
 
     // 事务
-    tryBegin()
+    // tryBegin()
 
     await ctx.render('index')
   },
