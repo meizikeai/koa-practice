@@ -10,15 +10,15 @@ https://github.com/meizikeai/koa-practice.git
 
 #### 项目结构
 
-| 路径         | 描述              | 详情 |
-| ------------ | ----------------- | ---- |
-| bin          | 启动文件          | -    |
-| client       | 客户端文件        | --   |
-| pm2          | pm2.keymetrics.io | --   |
-| public       | koa-static        | --   |
-| server       | 服务端文件        | --   |
-| views        | koa-views         | --   |
-| package.json | package.json      | --   |
+| 路径          | 描述               | 详情 |
+|---------------|--------------------|------|
+| client        | react.js           | --   |
+| pm2           | pm2.keymetrics.io  | --   |
+| public        | koa-static         | --   |
+| server        | koa.js             | --   |
+| views         | koa-views          | --   |
+| package.json  | package.json       | --   |
+| tsconfig.json | typescriptlang.org | --   |
 
 #### 开发环境
 
