@@ -3,7 +3,7 @@ module.exports = {
     node: true,
   },
   parserOptions: {
-    ecmaVersion: 13,
+    ecmaVersion: 'latest',
   },
   extends: ['plugin:prettier/recommended'],
   rules: {},

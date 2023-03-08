@@ -1,22 +1,22 @@
 require('../bin/compatible')
 
-const Koa = require('koa')
+const path = require('node:path')
+const koa = require('koa')
 const bodyParser = require('koa-bodyparser')
 const compress = require('koa-compress')
 const cors = require('@koa/cors')
 const helmet = require('koa-helmet')
 const json = require('koa-json')
 const jsonp = require('koa-safe-jsonp')
-const { koaBody } = require('koa-body')
 const logger = require('koa-visit-logger')
 const onerror = require('koa-onerror')
-const path = require('path')
 const routerScheme = require('koa-router-scheme')
 const views = require('koa-views')
+const { koaBody } = require('koa-body')
 
 const { handleZookeeper } = require('./libs/zookeeper')
 
-const app = new Koa()
+const app = new koa()
 
 // zookeeper
 // handleZookeeper()

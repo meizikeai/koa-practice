@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-const http = require('http')
+const http = require('node:http')
 const debug = require('debug')('demo:server')
 const app = require('../server/app')
 const { awaitZookeeper } = require('../server/libs/zookeeper')
