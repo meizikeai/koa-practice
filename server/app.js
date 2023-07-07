@@ -11,7 +11,7 @@ const jsonp = require('koa-safe-jsonp')
 const logger = require('koa-visit-logger')
 const onerror = require('koa-onerror')
 const routerScheme = require('koa-router-scheme')
-const views = require('koa-views')
+const views = require('@ladjs/koa-views')
 const { koaBody } = require('koa-body')
 
 const { handleZookeeper } = require('./libs/zookeeper')
