@@ -1,4 +1,5 @@
 const ctxUtils = require('../libs/ctx-utils')
+const request = require('../libs/request')
 
 module.exports = {
   async demo(ctx) {
@@ -15,6 +16,16 @@ module.exports = {
         }),
       }
     )
+
+    // request({
+    //   url: "http://127.0.0.1:3000/json",
+    //   reject: err => {
+    //     console.log(err)
+    //   },
+    //   resolve: data => {
+    //     console.log(data)
+    //   }
+    // })
 
     ctx.stream('demo')
     await ctx.render('demo')
