@@ -1,8 +1,7 @@
 const mysql = require('mysql2')
 const releaseMySQL = require('../config/release-mysql')
 const testMySQL = require('../config/test-mysql')
-const { getRandomSubscript } = require('../libs/random')
-const { handleCache, getCache } = require('../libs/cache-store')
+const { handleCache, getCache, getRandom } = require('../libs/cache')
 const { isPro, isLocalPro } = require('../config/env')
 
 function handleMySQL(key) {
@@ -61,7 +60,7 @@ function handleMySQL(key) {
 function getClient(key) {
   const pool = handleCache(`mysql.${key}`, () => {
     const client = handleMySQL(key)
-    const index = getRandomSubscript(client[key].length)
+    const index = getRandom(client[key].length)
 
     return client[key][index]
   })

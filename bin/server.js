@@ -81,6 +81,6 @@ function onError(error) {
 
 function onListening() {
   const addr = server.address()
-  debug(`Server running on 127.0.0.1:${addr.port}`)
-  console.log(`Server running on 127.0.0.1:${addr.port}`)
+  debug(`Listen and Server running on 127.0.0.1:${addr.port}`)
+  console.log(`Listen and Server running on 127.0.0.1:${addr.port}`)
 }

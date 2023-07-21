@@ -1,8 +1,7 @@
 const Redis = require('ioredis')
 const releaseRedis = require('../config/release-redis')
 const testRedis = require('../config/test-redis')
-const { getRandomSubscript } = require('../libs/random')
-const { handleCache, getCache } = require('../libs/cache-store')
+const { handleCache, getCache, getRandom } = require('../libs/cache')
 const { isPro, isLocalPro } = require('../config/env')
 
 function handleRedis(key) {
@@ -53,7 +52,7 @@ function handleRedis(key) {
 function getClient(key) {
   const pool = handleCache(`redis.${key}`, () => {
     const client = handleRedis(key)
-    const index = getRandomSubscript(client[key].length)
+    const index = getRandom(client[key].length)
 
     return client[key][index]
   })

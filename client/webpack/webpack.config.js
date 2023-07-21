@@ -172,7 +172,7 @@ module.exports = (env, argv) => {
   })
 
   if (argv.mode === 'production') {
-    config.devtool = false
+    config.devtool = 'none'
     // config.output.publicPath = `${cdn}/web/static/`
     config.optimization.minimize = true
     config.plugins.push(compressionPlugin)

@@ -6,7 +6,7 @@
  *   - phone       {Boolean}     判断终端环境
  */
 
-const isPhone = require('./is-phone')
+const isPhone = (ua) => /(iPhone|iPad|iPod|iOS|Android)/i.test(ua)
 
 module.exports = (options) => {
   const that = options.ctx

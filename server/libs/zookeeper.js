@@ -1,7 +1,6 @@
 const ZooKeeper = require('zookeeper')
 const zk = require('../config/zk')
-const { getRandomSubscript } = require('../libs/random')
-const { setCache, getCache } = require('../libs/cache-store')
+const { setCache, getCache, getRandom } = require('../libs/cache')
 const { isPro, isLocalPro, release, test, useZookeeper } = require('../config/env')
 
 function getZkConfig() {
@@ -13,7 +12,7 @@ function getZkConfig() {
     zk = release
   }
 
-  const key = getRandomSubscript(zk.length)
+  const key = getRandom(zk.length)
   const result = zk[key]
 
   return result

@@ -5,7 +5,7 @@ const React = require('react')
 // eslint-disable-next-line
 const ReactDOMServer = require('react-dom/server')
 
-const isPhone = require('../server/libs/is-phone')
+const isPhone = (ua) => /(iPhone|iPad|iPod|iOS|Android)/i.test(ua)
 
 const isDirectory = (dir) => {
   let result = false
