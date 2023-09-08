@@ -11,12 +11,7 @@
   ],
   "plugins": [
     "@babel/plugin-transform-modules-commonjs",
-    [
-      "@babel/plugin-proposal-class-properties",
-      {
-        "loose": false
-      }
-    ],
+    "@babel/plugin-transform-class-properties",
     [
       "@babel/plugin-transform-runtime",
       {
