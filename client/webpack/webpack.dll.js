@@ -4,7 +4,7 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
 module.exports = {
   mode: 'production',
-  devtool: 'none',
+  devtool: false,
   entry: {
     vendors: ['react', 'react-dom', 'react-router', 'react-router-dom', 'prop-types', 'whatwg-fetch'],
   },
