@@ -28,7 +28,7 @@
     "url": "https://github.com/meizikeai/koa-practice.git"
   },
   "dependencies": {
-    "@koa/cors": "^4.0.0",
+    "@koa/cors": "^5.0.0",
     "@ladjs/koa-views": "^9.0.0",
     "debug": "^4.3.4",
     "handlebars": "^4.7.8",
