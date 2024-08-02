@@ -1,14 +1,12 @@
 const ZooKeeper = require('zookeeper')
 const zk = require('../config/zk')
 const { setCache, getCache, getRandom } = require('../libs/cache')
-const { isPro, isLocalPro, release, test, useZookeeper } = require('../config/env')
+const { isPro, release, test, useZookeeper } = require('../config/env')
 
 function getZkConfig() {
   let zk = test
 
   if (isPro) {
-    zk = release
-  } else if (isLocalPro) {
     zk = release
   }
 

@@ -123,21 +123,35 @@ const htmlWebpack = (paths) => {
   return result
 }
 
+const findEntryFile = (directory, depth) => {
+  let result = []
+
+  if (depth > 2) return result
+
+  const data = fs.readdirSync(directory, { withFileTypes: true })
+
+  for (const item of data) {
+    if (item.isFile() && item.name === 'index.js') {
+      result.push(path.join(directory, item.name))
+    } else if (item.isDirectory() && depth < 2) {
+      result = result.concat(findEntryFile(path.join(directory, item.name), depth + 1))
+    }
+  }
+
+  return result
+}
+
 module.exports = (env, argv) => {
   const entry = {}
 
   if (env.all === 'true') {
-    const base = [path.resolve(__dirname, '../pages/*/index.js'), path.resolve(__dirname, '../pages/*/*/index.js')]
+    const pathList = findEntryFile(path.resolve(__dirname, '../pages/'), 0)
 
-    base.forEach((data) => {
-      const pathList = glob.sync(path.resolve(__dirname, data))
+    pathList.forEach(item => {
+      const tplPath = `${item.split('/pages/')[1].split('/index.js')[0]}`
+      const page = tplPath.replace(/\//ig, '~')
 
-      pathList.forEach((item) => {
-        const tplPath = `${item.split('/pages/')[1].split('/index.js')[0]}`
-        const page = tplPath.replace(/\//gi, '~')
-
-        entry[page] = [item]
-      })
+      entry[page] = [item]
     })
   } else {
     const page = env.p.replace(/\//gi, '~')

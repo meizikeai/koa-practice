@@ -1,5 +1,6 @@
 const ctxUtils = require('../libs/ctx-utils')
-const request = require('../libs/request')
+// const request = require('../libs/request')
+const log = require('../libs/logger')
 
 module.exports = {
   async demo(ctx) {
@@ -32,6 +33,12 @@ module.exports = {
   },
 
   async json(ctx) {
+    log.warn('Hello, warn!')
+    log.error('An error occurred!')
+    log.info('Hello, Pino!')
+    log.debug('This is a debug message')
+    log.trace('Hello, trace!')
+
     ctx.body = {
       title: 'koa2 json',
     }

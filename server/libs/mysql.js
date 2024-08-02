@@ -2,12 +2,12 @@ const mysql = require('mysql2')
 const releaseMySQL = require('../config/release-mysql')
 const testMySQL = require('../config/test-mysql')
 const { handleCache, getCache, getRandom } = require('../libs/cache')
-const { isPro, isLocalPro } = require('../config/env')
+const { isPro } = require('../config/env')
 
 function handleMySQL(key) {
   let datum = testMySQL
 
-  if (isPro || isLocalPro) {
+  if (isPro) {
     datum = releaseMySQL
   }
 

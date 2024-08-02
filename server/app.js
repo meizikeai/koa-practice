@@ -8,7 +8,7 @@ const cors = require('@koa/cors')
 const helmet = require('koa-helmet')
 const json = require('koa-json')
 const jsonp = require('koa-safe-jsonp')
-const logger = require('koa-visit-logger')
+const logger = require('koa-logger')
 const onerror = require('koa-onerror')
 const routerScheme = require('koa-router-scheme')
 const views = require('@ladjs/koa-views')
@@ -25,11 +25,7 @@ const app = new koa()
 global.KoaPractice = {}
 
 // logger
-app.use(
-  logger({
-    appName: 'koa-practice',
-  })
-)
+app.use(logger())
 
 // error
 onerror(app)

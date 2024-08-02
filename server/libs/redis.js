@@ -2,12 +2,12 @@ const Redis = require('ioredis')
 const releaseRedis = require('../config/release-redis')
 const testRedis = require('../config/test-redis')
 const { handleCache, getCache, getRandom } = require('../libs/cache')
-const { isPro, isLocalPro } = require('../config/env')
+const { isPro } = require('../config/env')
 
 function handleRedis(key) {
   let datum = testRedis
 
-  if (isPro || isLocalPro) {
+  if (isPro) {
     datum = releaseRedis
   }
 
