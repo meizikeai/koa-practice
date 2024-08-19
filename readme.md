@@ -11,7 +11,7 @@ https://github.com/meizikeai/koa-practice.git
 #### 项目结构
 
 | 路径          | 描述               | 详情 |
-|---------------|--------------------|------|
+| ------------- | ------------------ | ---- |
 | client        | react.js           | --   |
 | pm2           | pm2.keymetrics.io  | --   |
 | public        | koa-static         | --   |
@@ -40,8 +40,8 @@ https://github.com/meizikeai/koa-practice.git
   + pm2启动顺序（第一次启动需注意）
 
 ``` sh
-  $ pm2 delete koa-practice
-  $ pm2 kill
-  $ cd && cd koa-practice
-  $ pm2 restart /home/work/koa-practice/pm2/production.json
-  ```
+$ pm2 delete koa-practice
+$ pm2 kill
+$ cd && cd koa-practice
+$ pm2 restart /home/work/koa-practice/pm2/production.json
+```
