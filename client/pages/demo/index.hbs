@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>{{title}}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+  <link rel="shortcut icon" href="/favicon.ico">
+</head>
+
+<body>
+  <div id="app"></div>
+  <script>window.CONFIG = {{#if config}}{{{config}}};{{else}}{};{{/if}}</script>
+  <script>!function(e,t){function n(){o>425&&(o=425),s.style.fontSize=o/750*100+"px"}function i(){o>1366&&(o=1366),s.style.fontSize=o/13.66+"px"}var d=e.CONFIG.device,s=t.documentElement,o=s.clientWidth;if(d)return t.body.style.minWidth="980px",i(),e.addEventListener("resize",i),e.addEventListener("pageshow",(function(e){e.persisted&&i()})),!1;t.body.style.maxWidth="425px",n(),e.addEventListener("resize",n),e.addEventListener("pageshow",(function(e){e.persisted&&n()}))}(window,document)</script>
+</body>
+
+</html>

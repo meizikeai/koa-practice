@@ -1,0 +1,62 @@
+.toast-model-mini {
+  position: fixed;
+  z-index: 100000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.model-mini-layer {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99997;
+  display: -webkit-flex;
+  display: -webkit-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
+}
+
+.model-mini-layer .layer {
+  min-width: 100%;
+  max-width: 100%;
+  position: relative;
+  z-index: 99999;
+  overflow: hidden;
+  text-align: center;
+}
+
+.model-mini-layer .layer .content {
+  max-width: 86%;
+  display: inline-block;
+  font-size: .26rem;
+  padding: .2rem .4rem;
+  line-height: 1.5;
+  border-radius: .12rem;
+  color: #fff;
+  background-color: rgba(0, 0, 0, .8);
+}
+
+.model-mini-layer .layer-back {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99998;
+}
+
+.model-mini-layer .layer-back.black {
+  background-color: rgba(0, 0, 0, .4);
+}
+
+.model-mini-layer .layer-back.white {
+  background-color: rgba(255, 255, 255, .4);
+}

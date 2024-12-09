@@ -1,0 +1,42 @@
+.toast-model-custom {
+  position: fixed;
+  z-index: 100000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.model-custom-layer {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99997;
+  display: -webkit-flex;
+  display: -webkit-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
+}
+
+.model-custom-layer .layer {
+  width: 86%;
+  overflow: hidden;
+  position: relative;
+  z-index: 99999;
+}
+
+.model-custom-layer .layer-back {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99998;
+  background-color: rgba(0, 0, 0, .7);
+}
