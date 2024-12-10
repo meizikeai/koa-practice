@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Error - {{#if status}}{{status}}{{else}}{{400}}{{/if}}</title>
+  <link rel="shortcut icon" href="/favicon.ico">
+  <style>
+    body{padding: 50px;font: 14px "Helvetica Neue", Helvetica, sans-serif}
+    h1{font-size: 2em;margin-bottom: 5px}
+    pre{font-size: .8em}
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <h1>Error</h1>
+    <p>Something seems to have gone wrong!</p>
+    <p>{{#if message}}{{message}}{{else}}{{Not Found}}{{/if}}</p>
+  </div>
+</body>
+
+</html>

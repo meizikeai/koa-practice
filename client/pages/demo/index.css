@@ -1,0 +1,43 @@
+.demo {
+  font-size: .32rem;
+  margin: 1rem
+}
+
+.demo h1 {
+  font-size: 2em;
+  line-height: 1.5
+}
+
+.demo p {
+  line-height: 1.5
+}
+
+.demo p b {
+  display: inline-block;
+  margin: 0 .3rem
+}
+
+.click {
+  line-height: 1.5;
+  margin: .15rem 0 .3rem 0
+}
+
+.click span {
+  display: inline-block;
+  margin: 0 .1rem;
+  color: red
+}
+
+button {
+  padding: .2rem .5rem;
+  border: 1px solid #d9d9d9;
+  border-radius: .08rem;
+  background-color: #fff;
+  outline: 0;
+  color: #666
+}
+
+button:hover {
+  border: 1px solid #4595ec;
+  color: #4595ec
+}

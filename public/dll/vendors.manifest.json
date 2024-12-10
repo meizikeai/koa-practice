@@ -1,0 +1,88 @@
+{
+  "name": "vendors_46690e82e3d20f100438",
+  "content": {
+    "./node_modules/react/index.js": {
+      "id": 540,
+      "buildMeta": {
+        "exportsType": "dynamic",
+        "defaultObject": "redirect"
+      },
+      "exports": [
+        "Children",
+        "Component",
+        "Fragment",
+        "Profiler",
+        "PureComponent",
+        "StrictMode",
+        "Suspense",
+        "__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED",
+        "act",
+        "cloneElement",
+        "createContext",
+        "createElement",
+        "createFactory",
+        "createRef",
+        "forwardRef",
+        "isValidElement",
+        "lazy",
+        "memo",
+        "startTransition",
+        "unstable_act",
+        "useCallback",
+        "useContext",
+        "useDebugValue",
+        "useDeferredValue",
+        "useEffect",
+        "useId",
+        "useImperativeHandle",
+        "useInsertionEffect",
+        "useLayoutEffect",
+        "useMemo",
+        "useReducer",
+        "useRef",
+        "useState",
+        "useSyncExternalStore",
+        "useTransition",
+        "version"
+      ]
+    },
+    "./node_modules/prop-types/index.js": {
+      "id": 556,
+      "buildMeta": {}
+    },
+    "./node_modules/whatwg-fetch/fetch.js": {
+      "id": 624,
+      "buildMeta": {
+        "exportsType": "namespace"
+      },
+      "exports": [
+        "DOMException",
+        "Headers",
+        "Request",
+        "Response",
+        "fetch"
+      ]
+    },
+    "./node_modules/react-dom/index.js": {
+      "id": 961,
+      "buildMeta": {
+        "exportsType": "dynamic",
+        "defaultObject": "redirect"
+      },
+      "exports": [
+        "__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED",
+        "createPortal",
+        "createRoot",
+        "findDOMNode",
+        "flushSync",
+        "hydrate",
+        "hydrateRoot",
+        "render",
+        "unmountComponentAtNode",
+        "unstable_batchedUpdates",
+        "unstable_renderSubtreeIntoContainer",
+        "version"
+      ]
+    }
+  }
+}
