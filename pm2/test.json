@@ -9,6 +9,6 @@
     "node_modules"
   ],
   "env": {
-    "NODE_ENV": "development"
+    "NODE_ENV": "test"
   }
 }

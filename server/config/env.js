@@ -1,7 +1,7 @@
-// environments
+// env
 export const env = process.env.NODE_ENV
-export const isDev = env === 'development'
-export const isPro = env === 'production'
+export const isDev = env === 'test'
+export const isPro = env === 'release'
 
 // zookeeper
 export const useZookeeper = false
