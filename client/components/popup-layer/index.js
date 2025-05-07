@@ -1,16 +1,5 @@
-// PopupLayer.show({
-//   layer: false,
-//   confirm: true,
-//   validate: {
-//     txt: 'ok',
-//     callback: () => {
-//       // do something
-//     },
-//   },
-//   content: 'Good luck to you',
-// })
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import PropTypes from 'prop-types'
 import './index.css'
 
@@ -25,17 +14,21 @@ class PopupLayer extends Component {
     }
   }
 
-  hide = (pass) => {
-    const { validate, cancel } = this.props
+  hide = () => {
+    const { validate, cancel, root, container } = this.props
 
     restartScroll()
     this.setState({ show: false })
 
-    if (pass && typeof validate.callback === 'function') {
+    if (typeof validate.callback === 'function') {
+      root.unmount()
+      container.remove()
       validate.callback()
     }
 
-    if (!pass && typeof cancel.callback === 'function') {
+    if (typeof cancel.callback === 'function') {
+      root.unmount()
+      container.remove()
       cancel.callback()
     }
   }
@@ -53,17 +46,17 @@ class PopupLayer extends Component {
             <div className='content'>{content}</div>
             {confirm && (
               <div className='footer'>
-                <div className='validate' onClick={this.hide.bind(this, true)} role='presentation'>
+                <div className='validate' onClick={this.hide.bind(this)} role='presentation'>
                   {validate.txt}
                 </div>
-                <div className='cancel' onClick={this.hide.bind(this, false)} role='presentation'>
+                <div className='cancel' onClick={this.hide.bind(this)} role='presentation'>
                   {cancel.txt}
                 </div>
               </div>
             )}
             {!confirm && (
               <div className='footer'>
-                <div className='validate' onClick={this.hide.bind(this, true)} role='presentation'>
+                <div className='validate' onClick={this.hide.bind(this)} role='presentation'>
                   {validate.txt}
                 </div>
               </div>
@@ -84,18 +77,19 @@ PopupLayer.propTypes = {
   layer: PropTypes.bool,
   cancel: PropTypes.object,
   validate: PropTypes.object,
-  node: PropTypes.object,
   height: PropTypes.number,
+  root: PropTypes.object,
+  container: PropTypes.object,
 }
 
 PopupLayer.defaultProps = {
   show: true,
-  title: '温馨提示',
+  title: 'Tips',
   content: '',
   confirm: false,
   layer: true,
-  cancel: { txt: '取消', callback: null },
-  validate: { txt: '确定', callback: null },
+  cancel: { txt: 'Cancel', callback: null },
+  validate: { txt: 'OK', callback: null },
 }
 
 const getScrollTop = () => {
@@ -111,31 +105,15 @@ const setScrollTop = (top) => {
 function disableScroll() {
   popupLayerScrollTop = getScrollTop()
 
-  // const toastNode = document.querySelector('.toast-model-layer')
-
   document.documentElement.style.overflow = 'hidden'
   document.body.style.overflow = 'hidden'
-
-  // if (toastNode) {
-  //   toastNode.addEventListener('touchmove', event => {
-  //     event.preventDefault()
-  //   }, false)
-  // }
 }
 
 function restartScroll() {
-  // const toastNode = document.querySelector('.toast-model-layer')
-
   document.documentElement.style.overflow = 'auto'
   document.body.style.overflow = 'auto'
 
   setScrollTop(popupLayerScrollTop)
-
-  // if (toastNode) {
-  //   toastNode.removeEventListener('touchmove', event => {
-  //     event.preventDefault()
-  //   }, false)
-  // }
 }
 
 function createToast() {
@@ -149,18 +127,19 @@ function createToast() {
 export default {
   show(options) {
     const { title, content, duration, confirm, cancel, validate, layer } = options
-    const toast = createToast()
+    const container = createToast()
+    const root = createRoot(container)
 
     if (duration && typeof duration === 'number') {
       setTimeout(() => {
         restartScroll()
 
-        ReactDOM.unmountComponentAtNode(toast)
-        document.body.removeChild(toast)
+        root.unmount()
+        container.remove()
       }, duration)
     }
 
-    ReactDOM.render(
+    root.render(
       <PopupLayer
         title={title}
         content={content}
@@ -169,11 +148,24 @@ export default {
         height={document.body.clientHeight}
         validate={validate}
         layer={layer}
-        node={toast}
+        root={root}
+        container={container}
       />,
-      toast
+      document.body
     )
 
     disableScroll()
   },
 }
+
+// PopupLayer.show({
+//   layer: false,
+//   confirm: true,
+//   validate: {
+//     txt: 'ok',
+//     callback: () => {
+//       // do something
+//     },
+//   },
+//   content: 'Good luck to you',
+// })

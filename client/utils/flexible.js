@@ -1,5 +1,4 @@
-;(function flexible(window, document) {
-  const { device } = window.CONFIG
+export default (function flexible(window, document) {
   const docElement = document.documentElement
   let screenWidth = docElement.clientWidth
 
@@ -10,28 +9,28 @@
     docElement.style.fontSize = `${(screenWidth / 750) * 100}px`
   }
 
-  function setComputerRem() {
-    if (screenWidth > 1366) {
-      screenWidth = 1366
-    }
-    docElement.style.fontSize = `${screenWidth / 13.66}px`
-  }
+  // function setComputerRem() {
+  //   if (screenWidth > 1366) {
+  //     screenWidth = 1366
+  //   }
+  //   docElement.style.fontSize = `${screenWidth / 13.66}px`
+  // }
 
-  if (device) {
-    document.body.style.minWidth = '980px'
+  // if (device) {
+  //   document.body.style.minWidth = '980px'
 
-    setComputerRem()
+  //   setComputerRem()
 
-    // reset rem unit on page resize
-    window.addEventListener('resize', setComputerRem)
-    window.addEventListener('pageshow', (e) => {
-      if (e.persisted) {
-        setComputerRem()
-      }
-    })
+  //   // reset rem unit on page resize
+  //   window.addEventListener('resize', setComputerRem)
+  //   window.addEventListener('pageshow', (e) => {
+  //     if (e.persisted) {
+  //       setComputerRem()
+  //     }
+  //   })
 
-    return false
-  }
+  //   return false
+  // }
 
   document.body.style.maxWidth = '425px'
 

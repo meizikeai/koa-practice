@@ -1,12 +1,5 @@
-// PopupMinLayer.show({
-//   content: 'Good luck to you',
-//   duration: 2000,
-//   layer: false,
-//   model: false,
-//   callback: () => { },
-// })
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import PropTypes from 'prop-types'
 import './index.css'
 
@@ -116,7 +109,8 @@ function createToast() {
 export default {
   show(options) {
     let { content, callback, duration, layer, model } = options
-    const toast = createToast()
+    const container = createToast()
+    const root = createRoot(container)
 
     if (!duration) {
       duration = 2000
@@ -127,18 +121,33 @@ export default {
     setTimeout(() => {
       restartScroll()
 
-      ReactDOM.unmountComponentAtNode(toast)
-      document.body.removeChild(toast)
+      root.unmount()
+      container.remove()
+
       if (typeof callback === 'function') {
         callback()
       }
     }, duration)
 
-    ReactDOM.render(
-      <PopupMinLayer content={content} height={document.body.clientHeight} layer={layer} model={model} node={toast} />,
-      toast
+    root.render(
+      <PopupMinLayer
+        content={content}
+        height={document.body.clientHeight}
+        layer={layer}
+        model={model}
+        node={container}
+      />,
+      document.body
     )
 
     disableScroll()
   },
 }
+
+// PopupMinLayer.show({
+//   content: 'Good luck to you',
+//   duration: 2000,
+//   layer: false,
+//   model: false,
+//   callback: () => { },
+// })

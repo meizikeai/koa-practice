@@ -1,22 +1,5 @@
-// PopupCustomLayer.show({
-//   content: (
-//     <div className='pop-box'>
-//       <div className='content'>
-//         <div>{tips}</div>
-//       </div>
-//       <div className='close'></div>
-//     </div>
-//   ),
-//   handler: () => {
-//     let close = document.querySelector('.pop-box .close')
-//     close.addEventListener('click', () => {
-//       PopupCustomLayer.hide()
-//     })
-//   },
-// })
-
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import PropTypes from 'prop-types'
 import './index.css'
 
@@ -33,6 +16,7 @@ class PopupCustomLayer extends Component {
 
   componentDidMount() {
     const { handler } = this.props
+
     if (typeof handler === 'function') {
       handler()
     }
@@ -55,7 +39,6 @@ PopupCustomLayer.propTypes = {
   content: PropTypes.node,
   layer: PropTypes.bool,
   handler: PropTypes.func,
-  node: PropTypes.object,
   height: PropTypes.number,
 }
 
@@ -78,31 +61,15 @@ const setScrollTop = (top) => {
 function disableScroll() {
   popupCustomLayerScrollTop = getScrollTop()
 
-  // const toastNode = document.querySelector('.toast-model-custom')
-
   document.documentElement.style.overflow = 'hidden'
   document.body.style.overflow = 'hidden'
-
-  // if (toastNode && !scroll) {
-  //   toastNode.addEventListener('touchmove', event => {
-  //     event.preventDefault()
-  //   }, false)
-  // }
 }
 
 function restartScroll() {
-  // const toastNode = document.querySelector('.toast-model-custom')
-
   document.documentElement.style.overflow = 'inherit'
   document.body.style.overflow = 'inherit'
 
   setScrollTop(popupCustomLayerScrollTop)
-
-  // if (toastNode) {
-  //   toastNode.removeEventListener('touchmove', event => {
-  //     event.preventDefault()
-  //   }, false)
-  // }
 }
 
 function createToast() {
@@ -116,34 +83,50 @@ function createToast() {
 export default {
   show(options) {
     const { content, duration, handler, layer, scroll } = options
-    const toast = createToast()
+    const container = createToast()
+    const root = createRoot(container)
 
     if (duration && typeof duration === 'number') {
       setTimeout(() => {
         restartScroll()
 
-        ReactDOM.unmountComponentAtNode(toast)
-        document.body.removeChild(toast)
+        root.unmount()
+        container.remove()
       }, duration)
     }
 
-    ReactDOM.render(
+    root.render(
       <PopupCustomLayer
         content={content}
         confirm={confirm}
         handler={handler}
         height={document.body.clientHeight}
         layer={layer}
-        node={toast}
       />,
-      toast
+      document.body
     )
 
     disableScroll(scroll)
   },
   hide() {
-    // console.log(document.querySelector('.toast-model-custom'))
     restartScroll()
-    document.body.removeChild(document.querySelector('.toast-model-custom'))
+    document.querySelector('.toast-model-custom').remove()
   },
 }
+
+// PopupCustomLayer.show({
+//   content: (
+//     <div className='pop-box'>
+//       <div className='content'>
+//         <div>custom popup</div>
+//       </div>
+//       <div className='close'>close</div>
+//     </div>
+//   ),
+//   handler: () => {
+//     let close = document.querySelector('.pop-box .close')
+//     close.addEventListener('click', () => {
+//       PopupCustomLayer.hide()
+//     })
+//   },
+// })
