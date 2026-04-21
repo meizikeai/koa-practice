@@ -1,6 +1,6 @@
-import Router from 'koa-router'
+import Router from '@koa/router'
 import common from '../controllers/common.js'
-import test from '../controllers/test.js'
+import test from '../controllers/demo.js'
 
 const router = new Router()
 

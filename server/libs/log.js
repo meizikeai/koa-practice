@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import pino from 'pino'
 import { createStream } from 'rotating-file-stream'
-import { isPro } from '../config/env.js'
+import { isPro } from '../config/config.js'
 
 const support = ['.log']
 const LogFileName = ['error.log', 'warn.log', 'info.log', 'debug.log', 'trace.log']

@@ -1,15 +1,10 @@
 import mysql from 'mysql2'
-import releaseMySQL from '../config/release-mysql.js'
-import testMySQL from '../config/test-mysql.js'
+import cfg from '../config/config.js'
 import { handleCache, getCache, getRandom } from './cache.js'
-import { isPro } from '../config/env.js'
+import { env } from '../config/config.js'
 
 function handleMySQL(key) {
-  let datum = testMySQL
-
-  if (isPro) {
-    datum = releaseMySQL
-  }
+  let datum = cfg[env]
 
   const result = {}
   const [where, branch] = key.split('.')

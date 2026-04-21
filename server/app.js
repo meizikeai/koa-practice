@@ -13,16 +13,12 @@ import views from '@ladjs/koa-views'
 
 import { fileURLToPath } from 'url'
 import router from './libs/router.js'
-import { awaitZookeeper, handleZookeeper } from './libs/zookeeper.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const app = new koa()
-const port = process.env.PORT || 6500
-
-// zookeeper
-handleZookeeper()
+const port = process.env.PORT || 6660
 
 // logger
 app.use(logger())
@@ -130,8 +126,6 @@ app.on('error', (err) => {
 })
 
 // listening
-awaitZookeeper().then(() => {
-  app.listen(port, () => {
-    console.log(`Listen and Server running on 127.0.0.1:${port}`)
-  })
+app.listen(port, () => {
+  console.log(`Listen and Server running on 127.0.0.1:${port}`)
 })

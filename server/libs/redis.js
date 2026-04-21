@@ -1,15 +1,10 @@
 import Redis from 'ioredis'
-import releaseRedis from '../config/release-redis.js'
-import testRedis from '../config/test-redis.js'
+import cfg from '../config/config.js'
 import { handleCache, getCache, getRandom } from './cache.js'
-import { isPro } from '../config/env.js'
+import { env } from '../config/config.js'
 
 function handleRedis(key) {
-  let datum = testRedis
-
-  if (isPro) {
-    datum = releaseRedis
-  }
+  let datum = cfg[env]
 
   const result = {}
   const [where] = key.split('.')

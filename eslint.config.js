@@ -30,10 +30,11 @@ export default [
     },
   },
   {
-    files: ['server/**/*.js'],
+    files: ['server/**/*.js', 'test/**/*.js'],
     languageOptions: {
       globals: {
         ...globals.node,
+        fetch: 'readonly',
       },
     },
   },

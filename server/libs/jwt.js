@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import tool from './tool.js'
-import { env } from '../config/env.js'
+import { env } from '../config/config.js'
 
 // generate jwt key
 // openssl genrsa -out private.key 2048

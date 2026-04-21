@@ -6,7 +6,7 @@
   "main": "server/app.js",
   "private": true,
   "engines": {
-    "node": ">=22.14.0"
+    "node": ">=24.14.0"
   },
   "scripts": {
     "start": "NODE_ENV=test node server/app.js",
@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@koa/cors": "^5.0.0",
+    "@koa/router": "^15.4.0",
     "@ladjs/koa-views": "^9.0.0",
     "handlebars": "^4.7.8",
     "ioredis": "^5.6.1",
@@ -40,14 +41,12 @@
     "koa-helmet": "^8.0.1",
     "koa-json": "^2.0.2",
     "koa-logger": "^3.2.1",
-    "koa-router": "^13.0.1",
     "koa-safe-jsonp": "^1.0.0",
     "koa-static": "^5.0.0",
-    "mysql2": "^3.14.1",
+    "mysql2": "^3.22.1",
     "pino": "^9.6.0",
     "rotating-file-stream": "^3.2.6",
-    "sqids": "^0.3.0",
-    "zookeeper": "^6.2.3"
+    "sqids": "^0.3.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.27.2",
