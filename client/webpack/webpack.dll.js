@@ -1,10 +1,9 @@
 import path from 'path'
 import webpack from 'webpack'
 import CompressionWebpackPlugin from 'compression-webpack-plugin'
-import { fileURLToPath } from 'url'
+import { getDirname } from './config.js'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+const dirname = getDirname(import.meta.url)
 
 export default {
   mode: 'production',
@@ -15,8 +14,8 @@ export default {
   output: {
     filename: '[name].[fullhash].dll.js',
     library: '[name]_[fullhash]',
-    path: path.resolve(__dirname, '../../public/dll'),
-    // publicPath: `${cdn}/web/static/`,
+    path: path.resolve(dirname, '../../public/dll'),
+    // publicPath: `${cdn}/static/`,
     clean: true,
   },
   module: {
@@ -36,7 +35,13 @@ export default {
                   },
                 },
               ],
-              ['@babel/preset-react'],
+              [
+                '@babel/preset-react',
+                {
+                  development: false,
+                  runtime: 'automatic',
+                },
+              ],
             ],
           },
         },
@@ -47,7 +52,7 @@ export default {
     new webpack.DllPlugin({
       format: true,
       name: '[name]_[fullhash]',
-      path: path.resolve(__dirname, '../../public/dll/[name].manifest.json'),
+      path: path.resolve(dirname, '../../public/dll/[name].manifest.json'),
     }),
 
     new CompressionWebpackPlugin({
@@ -58,6 +63,6 @@ export default {
       minRatio: 0.8,
     }),
 
-    // Upload to Cloud Space, please disable the plugin yourself
+    // To upload to Cloud Space, please install the required plugin.
   ],
 }

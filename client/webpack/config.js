@@ -1,63 +1,67 @@
 import fs from 'fs'
 import path from 'path'
-import { fileURLToPath } from 'url'
+import url from 'url'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+const dirname = getDirname(import.meta.url)
 
-const isDirectory = (dir) => {
-  let result = false
-
-  try {
-    const stat = fs.statSync(dir)
-    if (stat.isDirectory()) {
-      result = true
-    }
-  } catch (err) {
-    console.error(`"${dir}" is not a directory!`, err)
-  }
-
-  return result
+export function getDirname(metaUrl) {
+  const filename = url.fileURLToPath(metaUrl)
+  return path.dirname(filename)
 }
 
-// https://polyfill.io/v3/polyfill.min.js
-const plugin = (() => {
-  const result = { dll: [], manifest: [] }
-  const files = fs.readdirSync(path.resolve(__dirname, '../../public/dll'))
+export const isDirectory = (dir) => {
+  try {
+    return fs.existsSync(dir) && fs.statSync(dir).isDirectory()
+  } catch (err) {
+    console.error(err)
+    return false
+  }
+}
 
-  files.forEach((file) => {
-    if (/.*\.dll.js$/.test(file)) {
+export const plugin = (() => {
+  const result = { dll: [], manifest: [] }
+  const dllPath = path.resolve(dirname, '../../public/dll')
+
+  if (!fs.existsSync(dllPath)) {
+    return result
+  }
+
+  const files = fs.readdirSync(dllPath)
+
+  for (const file of files) {
+    if (file.endsWith('.dll.js')) {
       result.dll.push(file)
-    }
-    if (/.*\.manifest.json$/.test(file)) {
+    } else if (file.endsWith('.manifest.json')) {
       result.manifest.push(file)
     }
-  })
+  }
 
   return result
 })()
 
-const getFolder = (dir) => {
-  let vessel = []
+export const getFolder = (dir) => {
   let result = []
-  const stat = isDirectory(dir)
 
-  if (stat) {
-    vessel = fs.readdirSync(dir)
-  }
+  if (!isDirectory(dir)) return result
 
-  vessel.forEach((name) => {
+  const names = fs.readdirSync(dir)
+
+  for (const name of names) {
+    if (name.startsWith('.')) continue
+
     const file = path.join(dir, name)
-    const stat = isDirectory(file)
 
-    if (stat) {
+    if (isDirectory(file)) {
       result = result.concat(getFolder(file))
     } else {
-      result.push({ name: name.split('.')[0], module: file })
+      if (name === 'index.js' || name === 'index.jsx') {
+        result.push({
+          name: 'index',
+          module: file,
+        })
+      }
     }
-  })
+  }
 
   return result
 }
-
-export { plugin, getFolder, isDirectory }

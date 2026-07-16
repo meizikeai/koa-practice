@@ -1,11 +1,12 @@
 {
-  "name": "vendors_32673d828d16fce820ac",
+  "name": "vendors_c55b4022816e0f6b1bf9",
   "content": {
     "./node_modules/react/index.js": {
       "id": 540,
       "buildMeta": {
         "exportsType": "dynamic",
-        "defaultObject": "redirect"
+        "defaultObject": "redirect",
+        "treatAsCommonJs": true
       },
       "exports": [
         "Children",
@@ -48,7 +49,9 @@
     },
     "./node_modules/prop-types/index.js": {
       "id": 556,
-      "buildMeta": {}
+      "buildMeta": {
+        "treatAsCommonJs": true
+      }
     },
     "./node_modules/whatwg-fetch/fetch.js": {
       "id": 624,
@@ -67,7 +70,8 @@
       "id": 961,
       "buildMeta": {
         "exportsType": "dynamic",
-        "defaultObject": "redirect"
+        "defaultObject": "redirect",
+        "treatAsCommonJs": true
       },
       "exports": [
         "__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED",

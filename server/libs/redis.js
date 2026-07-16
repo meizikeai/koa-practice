@@ -1,58 +1,44 @@
+// server/libs/redis.js
 import Redis from 'ioredis'
-import cfg from '../config/config.js'
-import { handleCache, getCache, getRandom } from './cache.js'
-import { env } from '../config/config.js'
+import * as config from '../config/index.js'
+import { appCache, getRandomIndex } from './cache.js'
 
-function handleRedis(key) {
-  let datum = cfg[env]
+const env = process.env.NODE_ENV || 'development'
 
-  const result = {}
-  const [where] = key.split('.')
-  const zk = getCache('redis')
+export async function initRedis() {
+  const redisConfig = config.redis
+  if (!redisConfig) throw new Error('[Server] No redis configuration found.')
 
-  datum = Object.assign(datum, zk)
+  for (const redisKey of Object.keys(redisConfig)) {
+    const envConfig = redisConfig[redisKey][env]
+    if (!envConfig) continue
 
-  if (!datum[where]) {
-    throw new Error(`Can not find the key: ${where}`)
-  }
+    if (envConfig.master && envConfig.master.length > 0) {
+      const clients = envConfig.master.map((addr) => {
+        const [host, port] = addr.split(':')
+        return new Redis({
+          host,
+          port: Number(port) || 6379,
+          password: envConfig.password || undefined,
+          family: envConfig.family || 4,
+          db: envConfig.db || 0,
+          lazyConnect: true,
+        })
+      })
 
-  for (const k in datum) {
-    if (k !== where) {
-      continue
-    }
+      await Promise.all(clients.map((client) => client.connect()))
 
-    const config = datum[k]
-    const data = config.master
-
-    result[key] = []
-
-    for (let i = 0; i < data.length; i++) {
-      const element = data[i]
-      const [host, port] = element.split(':')
-      const option = {
-        host: host,
-        port: Number(port) || 6379,
-        password: config.password,
-        family: config.family || 4,
-        db: config.db,
-      }
-
-      result[key][i] = new Redis(option)
+      appCache.set(`redis.${redisKey}`, clients)
     }
   }
-
-  return result
 }
 
-function getClient(key) {
-  const pool = handleCache(`redis.${key}`, () => {
-    const client = handleRedis(key)
-    const index = getRandom(client[key].length)
+export function getRedisClient(path = 'default') {
+  const clients = appCache.get(`redis.${path}`)
+  if (!clients || clients.length === 0) {
+    throw new Error('[Server] No active redis clients found.')
+  }
 
-    return client[key][index]
-  })
-
-  return pool
+  const index = getRandomIndex(clients.length)
+  return clients[index]
 }
-
-export default getClient

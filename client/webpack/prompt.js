@@ -2,7 +2,7 @@ import { input } from '@inquirer/prompts'
 
 export default async () => {
   const result = await input({
-    message: 'Please enter the project name',
+    message: 'Enter project name:',
     default: '',
     required: false,
   })

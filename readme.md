@@ -10,13 +10,10 @@ Built on [koa](https://koajs.com) and [react](https://reactjs.org), it supports 
 
 ## Project Structure
 
-| directory    | describe          | details |
+| Directory    | Describe          | Remark  |
 | ------------ | ----------------- | ------- |
-| client       | react.js          | --      |
-| pm2          | pm2.keymetrics.io | --      |
-| public       | koa-static        | --      |
-| server       | koa.js            | --      |
-| views        | koa-views         | --      |
+| client       | react.dev         | --      |
+| server       | koajs.com         | --      |
 | package.json | package.json      | --      |
 
 ## Development Environment
@@ -32,10 +29,10 @@ Development depends on [eslint.org](https://eslint.org), please use an editor th
 
 ## Access Example
 
-- <http://127.0.0.1:6500>
-- <http://127.0.0.1:6500/demo>
-- <http://127.0.0.1:6500/json>
-- <http://127.0.0.1:6500/string>
+- <http://127.0.0.1:8000>
+- <http://127.0.0.1:8000/demo>
+- <http://127.0.0.1:8000/json>
+- <http://127.0.0.1:8000/string>
 
 ## Precautions
 

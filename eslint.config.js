@@ -39,7 +39,7 @@ export default [
     },
   },
   {
-    ignores: ['node_modules/', 'public/', 'public/**/*.js'],
+    ignores: ['node_modules/', 'public/', 'public/**/*.js', 'ecosystem.config.cjs'],
     languageOptions: {
       sourceType: 'module',
       ecmaVersion: 'latest',

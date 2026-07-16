@@ -1,31 +1,32 @@
+import process from 'node:process'
 import shell from 'shelljs'
 import prompt from './prompt.js'
 
 prompt().then((args) => {
   if (args === '') {
-    console.warn('→ No input captured, please try again!')
+    console.error('✖ Input cannot be empty. Please try again.')
     return
   }
+  console.log('⠋ Bundling assets with Webpack, please wait...')
 
-  console.warn('↓ Please wait for webpack execution to complete →')
-
-  const child = shell.exec(`webpack --mode=development --config ./client/webpack/webpack.config.js --env p=${args}`, {
+  // const cmd = `webpack --mode=development --config ./client/webpack/webpack.config.js --env all=true`
+  const cmd = `webpack --mode=development --config ./client/webpack/webpack.config.js --env p=${args}`
+  const child = shell.exec(cmd, {
     async: true,
+    env: { ...process.env },
   })
 
-  child.stdout.on('data', () => {
-    console.warn('↓ Execution succeed!')
-    // shell.exit(1)
+  child.stdout.on('data', (data) => {
+    console.log(data)
+  })
+
+  child.on('close', (code) => {
+    if (code === 0) {
+      console.log('✔ Build successful!')
+      shell.exit(0)
+    } else {
+      console.error('✖ Build failed.')
+      shell.exit(1)
+    }
   })
 })
-
-// import shell from 'shelljs'
-
-// const child = shell.exec(`webpack --mode=development --config ./client/webpack/webpack.config.js --env all=true`, {
-//   async: true,
-// })
-
-// child.stdout.on('data', () => {
-//   console.warn('↓ Execution succeed!')
-//   shell.exit(1)
-// })

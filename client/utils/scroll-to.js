@@ -1,33 +1,45 @@
-const getScrollTop = () => {
-  const total = document.body.scrollTop + document.documentElement.scrollTop
-  return parseInt(total, 10)
+// 获取当前滚动高度
+export const getScrollTop = () => {
+  return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
 }
 
+// 设置滚动高度
 const setScrollTop = (top) => {
-  document.body.scrollTop = top
   document.documentElement.scrollTop = top
+  document.body.scrollTop = top
 }
 
-const scrollTo = (to, time) => {
-  const from = getScrollTop()
-  const runEvery = 5
+// 缓动算法 (Quad Ease-In-Out)
+// t: 当前时间, b: 初始值, c: 变化量, d: 持续时间
+const easeInOutQuad = (t, b, c, d) => {
+  t /= d / 2
+  if (t < 1) return (c / 2) * t * t + b
+  t--
+  return (-c / 2) * (t * (t - 2) - 1) + b
+}
 
-  to = parseInt(to, 10)
-  time /= runEvery
+/**
+ * 平滑滚动到指定位置
+ * @param {number} to - 目标高度
+ * @param {number} duration - 滚动总时长 (毫秒)
+ */
+export const scrollTo = (to, duration = 300) => {
+  const start = getScrollTop()
+  const change = to - start
+  const startTime = performance.now()
 
-  let i = 0
-  const interval = setInterval(() => {
-    i += 1
-    setScrollTop(((to - from) / time) * i + from)
+  const animateScroll = (currentTime) => {
+    const elapsedTime = currentTime - startTime
+    const nextPosition = easeInOutQuad(Math.min(elapsedTime, duration), start, change, duration)
 
-    if (i >= time) {
-      clearInterval(interval)
+    setScrollTop(nextPosition)
+
+    if (elapsedTime < duration) {
+      requestAnimationFrame(animateScroll)
+    } else {
+      setScrollTop(to)
     }
-  }, runEvery)
-}
+  }
 
-export default {
-  getScrollTop,
-  scrollTo,
-  setScrollTop,
+  requestAnimationFrame(animateScroll)
 }
