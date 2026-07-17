@@ -15,7 +15,7 @@
     "watch": "node client/webpack/watch.js",
     "build": "node client/webpack/build.js",
     "build-all": "node client/webpack/build-all.js",
-    "dll": "webpack --mode=production --config client/webpack/webpack.dll.js"
+    "build-dll": "webpack --mode=production --config client/webpack/webpack.dll.js"
   },
   "keywords": [
     "koa",
@@ -46,11 +46,13 @@
   "devDependencies": {
     "@babel/preset-env": "^8.0.2",
     "@babel/preset-react": "^8.0.1",
+    "@eslint/js": "^9.39.5",
     "@inquirer/prompts": "^8.5.2",
     "babel-loader": "^10.1.1",
     "compression-webpack-plugin": "^12.0.0",
     "css-loader": "^7.1.4",
     "css-minimizer-webpack-plugin": "^8.0.0",
+    "eslint": "^9.39.5",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.6",
     "eslint-plugin-react": "^7.37.5",

@@ -30,13 +30,13 @@ async function coreRequest({ url, data, headers = {}, method = 'GET', timeout = 
     const resData = await response.json()
     // console.log({ url, method: normalizedMethod, status: response.status, result: resData })
     return resData
-  } catch (error) {
-    if (error.name === 'TimeoutError') {
+  } catch (err) {
+    if (err.name === 'TimeoutError') {
       console.error(`Request Timeout [${normalizedMethod}] -> ${url} exceeded ${timeout}ms`)
     } else {
-      console.error(`Request Failed [${normalizedMethod}] -> ${url}:`, error.message)
+      console.error(`Request Failed [${normalizedMethod}] -> ${url}:`, err.message)
     }
-    throw error
+    throw err
   }
 }
 
@@ -44,7 +44,7 @@ const client = {
   get: (url, { headers, timeout } = {}) => coreRequest({ url, method: 'GET', headers, timeout }),
   post: (url, data, { headers, timeout } = {}) => coreRequest({ url, method: 'POST', data, headers, timeout }),
   put: (url, data, { headers, timeout } = {}) => coreRequest({ url, method: 'PUT', data, headers, timeout }),
-  delete: (url, { headers, timeout } = {}) => coreRequest({ url, method: 'DELETE', headers, timeout }),
+  delete: (url, data, { headers, timeout } = {}) => coreRequest({ url, method: 'DELETE', data, headers, timeout }),
 }
 
 export default client

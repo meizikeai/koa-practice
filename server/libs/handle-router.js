@@ -5,6 +5,7 @@ import url from 'url'
 
 const filename = url.fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+const allowedExtensions = new Set(['.js'])
 
 const getAbsoluteFiles = (dirPath) => {
   let files = []
@@ -12,10 +13,11 @@ const getAbsoluteFiles = (dirPath) => {
     const entries = fs.readdirSync(dirPath, { withFileTypes: true })
 
     for (const entry of entries) {
+      const ext = path.extname(entry.name)
       const fullPath = path.join(dirPath, entry.name)
       if (entry.isDirectory()) {
         files = files.concat(getAbsoluteFiles(fullPath))
-      } else if (entry.isFile() && entry.name.endsWith('.js')) {
+      } else if (entry.isFile() && allowedExtensions.has(ext)) {
         files.push(fullPath)
       }
     }

@@ -5,8 +5,20 @@ import eslintConfigPrettier from 'eslint-config-prettier'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 
 export default [
+  {
+    ignores: ['node_modules/', 'public/', 'public/**/*.js', 'ecosystem.config.cjs'],
+  },
+  {
+    languageOptions: {
+      sourceType: 'module',
+      ecmaVersion: 'latest',
+    },
+  },
+
   eslint.configs.recommended,
   eslintPluginPrettierRecommended,
+
+  // client
   {
     files: ['client/**/*.js'],
     ...react.configs.flat.recommended,
@@ -29,6 +41,8 @@ export default [
       react,
     },
   },
+
+  // server
   {
     files: ['server/**/*.js', 'test/**/*.js'],
     languageOptions: {
@@ -36,13 +50,6 @@ export default [
         ...globals.node,
         fetch: 'readonly',
       },
-    },
-  },
-  {
-    ignores: ['node_modules/', 'public/', 'public/**/*.js', 'ecosystem.config.cjs'],
-    languageOptions: {
-      sourceType: 'module',
-      ecmaVersion: 'latest',
     },
   },
 
