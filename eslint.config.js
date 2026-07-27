@@ -1,57 +1,42 @@
-import globals from 'globals'
-import eslint from '@eslint/js'
-import react from 'eslint-plugin-react'
+import js from '@eslint/js'
+import eslint from 'eslint/config'
 import eslintConfigPrettier from 'eslint-config-prettier'
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
+import reactPlugin from 'eslint-plugin-react'
+import reactHooksPlugin from 'eslint-plugin-react-hooks'
+import reactRefreshPlugin from 'eslint-plugin-react-refresh'
+import globals from 'globals'
 
-export default [
+export default eslint.defineConfig(
+  { ignores: ['node_modules/', 'public/', 'ecosystem.config.cjs'] },
+  { languageOptions: { sourceType: 'module', ecmaVersion: 'latest' } },
+  js.configs.recommended,
   {
-    ignores: ['node_modules/', 'public/', 'public/**/*.js', 'ecosystem.config.cjs'],
-  },
-  {
+    files: ['client/**/*.{js,jsx}'],
+    ...reactPlugin.configs.flat.recommended,
     languageOptions: {
-      sourceType: 'module',
-      ecmaVersion: 'latest',
-    },
-  },
-
-  eslint.configs.recommended,
-  eslintPluginPrettierRecommended,
-
-  // client
-  {
-    files: ['client/**/*.js'],
-    ...react.configs.flat.recommended,
-    languageOptions: {
-      globals: {
-        ...globals.browser,
-      },
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-      },
-    },
-    settings: {
-      react: {
-        version: 'detect',
-      },
+      globals: { ...globals.browser },
+      parserOptions: { ecmaFeatures: { jsx: true } },
     },
     plugins: {
-      react,
+      react: reactPlugin,
+      'react-hooks': reactHooksPlugin,
+      'react-refresh': reactRefreshPlugin,
     },
+    rules: {
+      ...reactHooksPlugin.configs.recommended.rules,
+      'react/react-in-jsx-scope': 'off',
+    },
+    settings: { react: { version: 'detect' } },
   },
-
-  // server
   {
     files: ['server/**/*.js', 'test/**/*.js'],
     languageOptions: {
-      globals: {
-        ...globals.node,
-        fetch: 'readonly',
-      },
+      globals: { ...globals.node },
+    },
+    rules: {
+      'no-console': 'off',
     },
   },
 
   eslintConfigPrettier,
-]
+)

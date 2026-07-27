@@ -1,5 +1,5 @@
 // server/libs/client.js
-import crypto from 'crypto'
+import crypto from 'node:crypto'
 
 async function coreRequest({ url, data, headers = {}, method = 'GET', timeout = 4000 }) {
   const normalizedMethod = method.toUpperCase()
@@ -22,7 +22,6 @@ async function coreRequest({ url, data, headers = {}, method = 'GET', timeout = 
 
   try {
     const response = await fetch(url, option)
-
     if (!response.ok) {
       throw new Error(`HTTP Error: ${response.status} ${response.statusText}`)
     }

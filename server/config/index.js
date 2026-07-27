@@ -1,7 +1,10 @@
 // env
-export const env = process.env.NODE_ENV
+export const env = process.env.NODE_ENV || 'development'
 export const isDev = env === 'development'
 export const isPro = env === 'production'
+
+// cors
+export const allowedOrigins = ['http://127.0.0.1:8001', 'http://127.0.0.1:8002']
 
 // mysql config
 export const mysql = {

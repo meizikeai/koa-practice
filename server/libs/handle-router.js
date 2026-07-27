@@ -1,7 +1,7 @@
 // server/libs/handle-router.js
-import fs from 'fs'
-import path from 'path'
-import url from 'url'
+import fs from 'node:fs'
+import path from 'node:path'
+import url from 'node:url'
 
 const filename = url.fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -40,8 +40,8 @@ export default async (app, folder = '../routers') => {
         app.use(routeModule.default.routes())
         app.use(routeModule.default.allowedMethods())
       }
-    } catch (error) {
-      throw new Error(`Failed to load route module [${filePath}]: ${error.message}`)
+    } catch (err) {
+      throw new Error(`Failed to load route module [${filePath}]: ${err.message}`)
     }
   }
 }

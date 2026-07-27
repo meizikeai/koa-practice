@@ -1,5 +1,5 @@
 // server/libs/secret.js
-import crypto from 'crypto'
+import crypto from 'node:crypto'
 
 const secret = {
   bf5d: 'Av7Cc1pfGdKQkJpcJig1Hg==',

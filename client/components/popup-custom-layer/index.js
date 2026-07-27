@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { createRoot } from 'react-dom/client'
 import PropTypes from 'prop-types'
+import { Component } from 'react'
+import { createRoot } from 'react-dom/client'
 import './index.css'
 
 let popupCustomLayerScrollTop = 0
@@ -103,7 +103,7 @@ export default {
         height={document.body.clientHeight}
         layer={layer}
       />,
-      document.body
+      document.body,
     )
 
     disableScroll(scroll)

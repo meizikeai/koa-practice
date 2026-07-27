@@ -60,8 +60,8 @@ export default class BaseController {
     try {
       const token = handleServiceDecrypt(tokenDecrypt)
       claims = handleJsonWebTokenDecrypt(token)
-    } catch (error) {
-      console.error('Token parsing failed:', error)
+    } catch (err) {
+      console.error('Token parsing failed:', err)
       await this.forbidden(ctx)
       return
     }

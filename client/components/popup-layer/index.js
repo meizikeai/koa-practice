@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { createRoot } from 'react-dom/client'
 import PropTypes from 'prop-types'
+import { Component } from 'react'
+import { createRoot } from 'react-dom/client'
 import './index.css'
 
 let popupLayerScrollTop = 0
@@ -20,16 +20,10 @@ class PopupLayer extends Component {
     restartScroll()
     this.setState({ show: false })
 
-    if (typeof validate.callback === 'function') {
+    if (typeof validate.callback === 'function' || typeof cancel.callback === 'function') {
       root.unmount()
       container.remove()
       validate.callback()
-    }
-
-    if (typeof cancel.callback === 'function') {
-      root.unmount()
-      container.remove()
-      cancel.callback()
     }
   }
 
@@ -46,19 +40,19 @@ class PopupLayer extends Component {
             <div className='content'>{content}</div>
             {confirm && (
               <div className='footer'>
-                <div className='validate' onClick={this.hide.bind(this)} role='presentation'>
+                <button type='button' className='validate' onClick={this.hide}>
                   {validate.txt}
-                </div>
-                <div className='cancel' onClick={this.hide.bind(this)} role='presentation'>
+                </button>
+                <button type='button' className='cancel' onClick={this.hide}>
                   {cancel.txt}
-                </div>
+                </button>
               </div>
             )}
             {!confirm && (
               <div className='footer'>
-                <div className='validate' onClick={this.hide.bind(this)} role='presentation'>
+                <button type='button' className='validate' onClick={this.hide}>
                   {validate.txt}
-                </div>
+                </button>
               </div>
             )}
           </div>
@@ -151,7 +145,7 @@ export default {
         root={root}
         container={container}
       />,
-      document.body
+      document.body,
     )
 
     disableScroll()

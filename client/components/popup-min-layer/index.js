@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { createRoot } from 'react-dom/client'
 import PropTypes from 'prop-types'
+import { Component } from 'react'
+import { createRoot } from 'react-dom/client'
 import './index.css'
 
 let popupMinLayerScrollTop = 0
@@ -72,7 +72,7 @@ function disableScroll() {
       (event) => {
         event.preventDefault()
       },
-      false
+      false,
     )
   }
 }
@@ -93,7 +93,7 @@ function restartScroll() {
       (event) => {
         event.preventDefault()
       },
-      false
+      false,
     )
   }
 }
@@ -137,7 +137,7 @@ export default {
         model={model}
         node={container}
       />,
-      document.body
+      document.body,
     )
 
     disableScroll()

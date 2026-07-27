@@ -1,6 +1,6 @@
-import path from 'path'
-import webpack from 'webpack'
+import path from 'node:path'
 import CompressionWebpackPlugin from 'compression-webpack-plugin'
+import webpack from 'webpack'
 import { getDirname } from './config.js'
 
 const dirname = getDirname(import.meta.url)

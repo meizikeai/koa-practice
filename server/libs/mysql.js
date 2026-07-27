@@ -41,9 +41,8 @@ function createPoolInstance(address, cfg) {
 export function getMysqlPool(path = 'default.master') {
   const pools = appCache.get(`mysql.${path}`)
   if (!pools || pools.length === 0) {
-    throw new Error(`[Server] No active connection pools found for path: ${path}`)
+    throw new Error(`[Server] No active connection pool found for path: ${path}`)
   }
-
   const index = getRandomIndex(pools.length)
   return pools[index]
 }

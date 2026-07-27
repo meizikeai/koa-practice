@@ -1,16 +1,18 @@
-import path from 'path'
-import koa from 'koa'
-import compress from 'koa-compress'
+import path from 'node:path'
 import cors from '@koa/cors'
+import views from '@ladjs/koa-views'
+import koa from 'koa'
+import koaBodyParser from 'koa-bodyparser'
+import compress from 'koa-compress'
 import helmet from 'koa-helmet'
 import json from 'koa-json'
-import koaBodyParser from 'koa-bodyparser'
 import logger from 'koa-pino-logger'
 import serve from 'koa-static'
-import views from '@ladjs/koa-views'
 
+import { allowedOrigins } from './config/index.js'
 import initRouter from './libs/handle-router.js'
 import { getDirname } from './utils/common.js'
+
 // import { initMySQL } from './libs/mysql.js'
 // import { initRedis } from './libs/redis.js'
 
@@ -31,8 +33,7 @@ app.use(
     maxAge: 5 * 60,
     origin: (ctx) => {
       const origin = ctx.get('Origin')
-      const white = ['http://127.0.0.1:7000', 'http://127.0.0.1:9000']
-      if (white.includes(origin)) {
+      if (allowedOrigins.includes(origin)) {
         return origin
       }
       return false

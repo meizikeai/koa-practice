@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Component } from 'react'
 import { createRoot } from 'react-dom/client'
 
 import Layout from '../../components/layout/index.js'
-import PopupMinLayer from '../../components/popup-min-layer/index.js'
-import PopupLayer from '../../components/popup-layer/index.js'
 import PopupCustomLayer from '../../components/popup-custom-layer/index.js'
+import PopupLayer from '../../components/popup-layer/index.js'
+import PopupMinLayer from '../../components/popup-min-layer/index.js'
 
 import './index.css'
 
@@ -60,7 +60,7 @@ class App extends Component {
         </div>
       ),
       handler: () => {
-        let close = document.querySelector('.pop-box .close')
+        const close = document.querySelector('.pop-box .close')
         close.addEventListener('click', () => {
           PopupCustomLayer.hide()
         })

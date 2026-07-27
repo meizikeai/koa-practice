@@ -9,13 +9,15 @@
     "node": ">=24"
   },
   "scripts": {
-    "start": "NODE_ENV=development node server/index.js",
+    "start": "node server/index.js",
     "test": "NODE_ENV=development node server/index.js",
     "release": "NODE_ENV=production node server/index.js",
     "watch": "node client/webpack/watch.js",
     "build": "node client/webpack/build.js",
     "build-all": "node client/webpack/build-all.js",
-    "build-dll": "webpack --mode=production --config client/webpack/webpack.dll.js"
+    "build-dll": "webpack --mode=production --config client/webpack/webpack.dll.js",
+    "check": "biome check .",
+    "check:write": "biome check --write ."
   },
   "keywords": [
     "koa",
@@ -41,26 +43,20 @@
     "koa-json": "^2.0.2",
     "koa-pino-logger": "^5.0.0",
     "koa-static": "^5.0.0",
-    "mysql2": "^3.23.0"
+    "mysql2": "^3.23.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^8.0.2",
     "@babel/preset-react": "^8.0.1",
-    "@eslint/js": "^9.39.5",
+    "@biomejs/biome": "^2.5.5",
     "@inquirer/prompts": "^8.5.2",
     "babel-loader": "^10.1.1",
     "compression-webpack-plugin": "^12.0.0",
     "css-loader": "^7.1.4",
     "css-minimizer-webpack-plugin": "^8.0.0",
-    "eslint": "^9.39.5",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.6",
-    "eslint-plugin-react": "^7.37.5",
-    "globals": "^17.7.0",
     "html-webpack-plugin": "^5.6.7",
     "html-webpack-tags-plugin": "^3.0.2",
     "mini-css-extract-plugin": "^2.10.2",
-    "prettier": "^3.9.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "shelljs": "^0.10.0",

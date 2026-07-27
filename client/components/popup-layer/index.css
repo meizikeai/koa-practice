@@ -14,8 +14,6 @@
   top: 0;
   left: 0;
   z-index: 99997;
-  display: -webkit-flex;
-  display: -webkit-box;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,29 +30,29 @@
   min-height: 2rem;
   overflow: hidden;
   background-color: #fff;
-  border-radius: .3rem;
+  border-radius: 0.3rem;
   box-shadow: 0px 5px 20px 0px rgba(102, 102, 102, 0.2);
 }
 
 .model-large-layer .main {
-  padding: .1rem .2rem;
+  padding: 0.1rem 0.2rem;
 }
 
 .model-large-layer .layer .header .title {
   text-align: center;
-  font-size: .34rem;
+  font-size: 0.34rem;
   line-height: 2;
   color: #d1a762;
-  padding: .3rem 0 .2rem;
+  padding: 0.3rem 0 0.2rem;
 }
 
 .model-large-layer .layer .content {
   color: #79818d;
-  font-size: .3rem;
+  font-size: 0.3rem;
   background-color: #f6f9fa;
-  border-radius: .12rem;
-  padding: .3rem .2rem;
-  margin-bottom: .3rem;
+  border-radius: 0.12rem;
+  padding: 0.3rem 0.2rem;
+  margin-bottom: 0.3rem;
   text-align: center;
   line-height: 1.5;
 }
@@ -62,17 +60,17 @@
 .model-large-layer .layer .footer {
   clear: both;
   text-align: center;
-  margin: 0 .2rem;
+  margin: 0 0.2rem;
 }
 
 .model-large-layer .layer .footer .validate {
   background-color: #cba86c;
   width: 100%;
-  margin: 0 auto .2rem;
-  height: .82rem;
-  line-height: .82rem;
-  border-radius: .82rem;
-  font-size: .3rem;
+  margin: 0 auto 0.2rem;
+  height: 0.82rem;
+  line-height: 0.82rem;
+  border-radius: 0.82rem;
+  font-size: 0.3rem;
   color: #fff;
   text-align: center;
 }
@@ -80,11 +78,11 @@
 .model-large-layer .layer .footer .cancel {
   width: 100%;
   margin: 0 auto;
-  font-size: .26rem;
+  font-size: 0.26rem;
   color: #a5a6b2;
   text-align: center;
-  height: .82rem;
-  line-height: .82rem;
+  height: 0.82rem;
+  line-height: 0.82rem;
 }
 
 .model-large-layer .layer-back {
@@ -94,5 +92,5 @@
   top: 0;
   left: 0;
   z-index: 99998;
-  background-color: rgba(0, 0, 0, .4);
+  background-color: rgba(0, 0, 0, 0.4);
 }

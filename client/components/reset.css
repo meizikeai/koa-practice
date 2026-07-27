@@ -80,7 +80,7 @@ h6 {
 
 q:after,
 q:before {
-  content: '';
+  content: "";
 }
 
 abbr,
@@ -116,7 +116,7 @@ html {
 }
 
 body {
-  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragion Sans GB', 'Microsoft YaHei', Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragion Sans GB", "Microsoft YaHei", Arial, sans-serif;
   position: relative;
   display: flex;
   min-height: 100vh;

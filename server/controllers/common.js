@@ -2,10 +2,6 @@
 import BaseController from './base.js'
 
 class CommonController extends BaseController {
-  constructor() {
-    super()
-  }
-
   async home(ctx) {
     ctx.state = {
       title: 'Hello Koa 2!',

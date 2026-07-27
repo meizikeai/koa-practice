@@ -36,7 +36,7 @@ export async function initRedis() {
 export function getRedisClient(path = 'default') {
   const clients = appCache.get(`redis.${path}`)
   if (!clients || clients.length === 0) {
-    throw new Error('[Server] No active redis clients found.')
+    throw new Error(`[Server] No active redis client found for path: ${path}`)
   }
 
   const index = getRandomIndex(clients.length)

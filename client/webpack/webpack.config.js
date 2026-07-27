@@ -1,13 +1,13 @@
-import fs from 'fs'
-import path from 'path'
-import webpack from 'webpack'
+import fs from 'node:fs'
+import path from 'node:path'
 import CompressionWebpackPlugin from 'compression-webpack-plugin'
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import HtmlWebpackTagsPlugin from 'html-webpack-tags-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import TerserPlugin from 'terser-webpack-plugin'
-import { getDirname, plugin, isDirectory } from './config.js'
+import webpack from 'webpack'
+import { getDirname, isDirectory, plugin } from './config.js'
 
 const dirname = getDirname(import.meta.url)
 
